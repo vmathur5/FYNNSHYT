@@ -46,6 +46,12 @@ body {
   transition: transform 1s ease-in-out;
 }
 
+.card-wrapper.inactive {
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
 /* The card itself, ready to fold */
 .card {
   width: 100%;
@@ -194,29 +200,15 @@ body {
   opacity: 0.7;
 }
 
-/* --- The final message that appears at the end --- */
-.final-message-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  max-width: 90%;
-}
-
-.final-message {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 2s ease-in-out;
-  font-size: clamp(1.2rem, 5vw, 2rem);
-  font-family: 'Dancing Script', cursive;
-  color: var(--text-dark);
-  text-shadow: 1px 1px 5px var(--main-pink);
-  padding: 20px;
-}
-.final-message.active {
-  opacity: 1;
-  pointer-events: auto;
+/* The subtle shake notice for phones */
+.shake-notice {
+    position: absolute;
+    bottom: 20px;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    opacity: 0.7;
+    animation: fadeIn 1s forwards;
+    animation-delay: 4s;
 }
 
 /* --- All the lovely animations --- */
@@ -262,13 +254,8 @@ body {
       <button class="nav-btn" id="prevBtn">‹</button>
       <button class="nav-btn" id="nextBtn">›</button>
       <div class="counter" id="counter"></div>
+      <div class="shake-notice hidden" id="shakeNotice">...or just give it a shake!</div>
     </div>
-  </div>
-</div>
-
-<div class="final-message-container">
-  <div class="final-message" id="finalMessage">
-    If you ever feel something wrong just remember I waited for you the most, Cared for you no matter the situation was, I kept my promises come true!
   </div>
 </div>
 
@@ -278,9 +265,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const cardWrapper = document.getElementById('cardWrapper');
   const counterElement = document.getElementById('counter');
   const messageContainer = document.getElementById('messageContainer');
-  const finalMessage = document.getElementById('finalMessage');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
+  const shakeNotice = document.getElementById('shakeNotice');
   
   // This will keep track of which message we're on
   let currentIndex = 0;
@@ -330,6 +317,9 @@ document.addEventListener("DOMContentLoaded", function() {
   // The grand opening on click
   cardWrapper.addEventListener('click', () => {
     card.classList.add('open');
+    if (isMobile) {
+      shakeNotice.classList.remove('hidden');
+    }
   }, { once: true });
 
   // A little helper function to show the right card
@@ -350,12 +340,31 @@ document.addEventListener("DOMContentLoaded", function() {
     if (currentIndex < messages.length - 1) {
       showCard(currentIndex + 1);
     } else {
-      // If we're at the very end, let's close the card and show the final message
+      // If we're at the very end, let's close the card and restart
       card.classList.remove('open');
+      if (isMobile) {
+        shakeNotice.classList.add('hidden');
+      }
       setTimeout(() => {
-        finalMessage.classList.add('active');
+        cardWrapper.removeEventListener('click', openCard, { once: true });
+        cardWrapper.classList.add('inactive');
+        
+        setTimeout(() => {
+          currentIndex = 0;
+          showCard(currentIndex);
+          card.classList.remove('open');
+          cardWrapper.classList.remove('inactive');
+          cardWrapper.addEventListener('click', openCard, { once: true });
+        }, 1500); // Time to go home
       }, 1500); // Waiting for the card to fold back
     }
+  }
+
+  function openCard() {
+      card.classList.add('open');
+      if (isMobile) {
+        shakeNotice.classList.remove('hidden');
+      }
   }
 
   // Clicking the next button
