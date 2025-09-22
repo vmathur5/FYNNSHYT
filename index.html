@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Angry Bird ❤️</title>
+<style>
+/* Reset */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', 'Georgia', serif;}
+body{
+  background: linear-gradient(120deg,#667eea,#764ba2);
+  display:flex; justify-content:center; align-items:center; min-height:100vh;
+  overflow:hidden; color:white; perspective:1500px;
+}
+
+/* Particles Background */
+.particles{
+  position:absolute; width:100%; height:100%; overflow:hidden; z-index:-1;
+}
+.particle{
+  position:absolute; width:8px; height:8px; background:white; border-radius:50%;
+  opacity:0.8; animation:particleAnim 8s linear infinite;
+}
+@keyframes particleAnim{
+  0%{transform:translateY(100vh) translateX(0) scale(0.5); opacity:0;}
+  50%{opacity:0.9;}
+  100%{transform:translateY(-10vh) translateX(50vw) scale(1); opacity:0;}
+}
+
+/* Floating emojis */
+.emoji{
+  position:absolute; font-size:2.5rem; animation:float 5s ease-in-out infinite;
+}
+@keyframes float{
+  0%{transform:translateY(0) rotate(0deg);}
+  50%{transform:translateY(-50px) rotate(180deg);}
+  100%{transform:translateY(0) rotate(360deg);}
+}
+
+/* Container */
+.container{
+  width:95%; max-width:500px; position:relative; text-align:center;
+  animation:fadeInUp 1.5s ease forwards;
+}
+@keyframes fadeInUp{
+  0%{opacity:0; transform:translateY(50px) scale(0.9);}
+  100%{opacity:1; transform:translateY(0) scale(1);}
+}
+
+/* Header */
+.header{
+  margin-bottom:20px;
+}
+.header h1{
+  font-size:2.4rem; text-shadow:2px 2px 15px rgba(0,0,0,0.6);
+  animation:glow 2s ease-in-out infinite alternate, typing 3s steps(20) forwards;
+  overflow:hidden; white-space:nowrap; border-right:4px solid white;
+}
+.header p,#time-together{font-size:1rem; opacity:0.9; margin-top:5px;}
+@keyframes glow{
+  from {text-shadow:2px 2px 15px rgba(0,0,0,0.3),0 0 10px #fff;}
+  to {text-shadow:2px 2px 15px rgba(0,0,0,0.3),0 0 25px #fff;}
+}
+@keyframes typing{
+  from{width:0;}
+  to{width:100%;}
+}
+
+/* Cards */
+.cards-container{
+  position:relative; width:100%; height:550px; overflow:hidden;
+}
+.card{
+  position:absolute; width:100%; height:100%;
+  background: rgba(255,255,255,0.08);
+  border-radius:25px;
+  padding:40px 25px;
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  opacity:0; transform:translateX(100%) scale(0.9) rotateY(15deg);
+  transition: all 0.8s cubic-bezier(0.68,-0.55,0.27,1.55);
+}
+.card.active{
+  opacity:1; transform:translateX(0) scale(1) rotateY(0);
+  animation:cardBounce 0.6s ease;
+}
+.card.prev{
+  opacity:0.6; transform:translateX(-100%) scale(0.95) rotateY(-15deg);
+}
+.card:hover{
+  transform:scale(1.03) rotateY(2deg);
+  box-shadow:0 25px 70px rgba(0,0,0,0.7);
+}
+@keyframes cardBounce{
+  0%{transform:scale(0.95) translateY(-20px);}
+  50%{transform:scale(1.05) translateY(10px);}
+  100%{transform:scale(1) translateY(0);}
+}
+.card h2{font-size:1.9rem; margin-bottom:20px;}
+.card p{font-size:1.15rem; line-height:1.6; max-height:240px; overflow-y:auto; color:white;}
+
+/* Navigation */
+.navigation{
+  position:absolute; bottom:-70px; left:50%; transform:translateX(-50%); display:flex; gap:20px;
+}
+.nav-btn{
+  width:55px; height:55px; border-radius:50%; border:none;
+  background: rgba(255,255,255,0.25); color:white; font-size:2rem; cursor:pointer;
+  transition:0.3s; backdrop-filter: blur(10px); box-shadow:0 5px 20px rgba(0,0,0,0.5);
+}
+.nav-btn:hover{
+  background: rgba(255,255,255,0.5); transform:scale(1.25) rotate(10deg);
+}
+.indicators{
+  position:absolute; bottom:-110px; left:50%; transform:translateX(-50%);
+  display:flex; gap:14px;
+}
+.indicator{
+  width:15px; height:15px; border-radius:50%; background:rgba(255,255,255,0.4);
+  cursor:pointer; transition:all 0.3s ease;
+}
+.indicator.active{background:white; transform:scale(1.5);}
+
+/* Responsive */
+@media(max-width:480px){
+  .container{max-width:360px;}
+  .card{padding:30px 20px;}
+  .card h2{font-size:1.6rem;}
+  .card p{font-size:1rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- Floating emojis -->
+<div class="emoji" style="top:10%; left:20%;">🍯</div>
+<div class="emoji" style="top:30%; left:70%;">🎀</div>
+<div class="emoji" style="top:60%; left:25%;">❤️</div>
+<div class="emoji" style="top:80%; left:60%;">🍯</div>
+
+<div class="container">
+  <div class="header">
+    <h1>For My Angry Bird ❤️</h1>
+    <p>From 1:05 AM, 20 Sept 2025</p>
+    <p id="time-together">Loading time together...</p>
+  </div>
+
+  <div class="cards-container">
+    <div class="card active">
+      <h2>Our Memories 🍯🎀</h2>
+      <p>I never let you sleep :) like I never did. The day we met first? After 3 years, made me fall in love with you again. Sitting with you alone makes me feel so comfortable and safe.</p>
+    </div>
+    <div class="card">
+      <h2>Fun Moments 🍯🎀</h2>
+      <p>Talking and teasing you on that rainy night was unforgettable. Your “Vidit chup reh” messages make me smile every time. Even when you prank me, it’s totally worth it.</p>
+    </div>
+    <div class="card">
+      <h2>Care & Love 🍯🎀</h2>
+      <p>I promise to always support you, care for you, and never hurt you. Your happiness is my priority, and I will be there through every moment.</p>
+    </div>
+    <div class="card">
+      <h2>Forever Us 🍯🎀</h2>
+      <p>From that exact moment on 20 Sept, we created something special. All our small jokes, chats, and pranks are treasures. Every “Honey” and “Bow” from you brightens my day.</p>
+    </div>
+  </div>
+
+  <div class="navigation">
+    <button class="nav-btn" onclick="prevCard()">‹</button>
+    <button class="nav-btn" onclick="nextCard()">›</button>
+  </div>
+
+  <div class="indicators">
+    <div class="indicator active" onclick="goToCard(0)"></div>
+    <div class="indicator" onclick="goToCard(1)"></div>
+    <div class="indicator" onclick="goToCard(2)"></div>
+    <div class="indicator" onclick="goToCard(3)"></div>
+  </div>
+</div>
+
+<script>
+// Cards
+let currentCard=0;
+const cards=document.querySelectorAll('.card');
+const indicators=document.querySelectorAll('.indicator');
+const totalCards=cards.length;
+function showCard(index){
+  cards.forEach((card,i)=>{
+    card.classList.remove('active','prev');
+    if(i===index) card.classList.add('active');
+    else if(i<index) card.classList.add('prev');
+  });
+  indicators.forEach((ind,i)=>ind.classList.toggle('active',i===index));
+  currentCard=index;
+}
+function nextCard(){showCard((currentCard+1)%totalCards);}
+function prevCard(){showCard((currentCard-1+totalCards)%totalCards);}
+function goToCard(index){showCard(index);}
+
+// Swipe
+let startX=0,endX=0;
+document.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{
+  endX=e.changedTouches[0].clientX;
+  const diff=startX-endX;
+  if(Math.abs(diff)>50){if(diff>0) nextCard(); else prevCard();}
+});
+
+// Keyboard
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight') nextCard(); if(e.key==='ArrowLeft') prevCard();});
+
+// Live time together
+const startTime=new Date('2025-09-20T01:05:00');
+const timeDisplay=document.getElementById('time-together');
+function updateTimeTogether(){
+  let diff=new Date()-startTime;
+  const days=Math.floor(diff/(1000*60*60*24)); diff-=days*(1000*60*60*24);
+  const hours=Math.floor(diff/(1000*60*60)); diff-=hours*(1000*60*60);
+  const minutes=Math.floor(diff/(1000*60)); diff-=minutes*(1000*60);
+  const seconds=Math.floor(diff/1000);
+  timeDisplay.textContent=`Together for ${days}d ${hours}h ${minutes}m ${seconds}s ❤️`;
+}
+setInterval(updateTimeTogether,1000);
+updateTimeTogether();
+
+// Particles
+const particlesContainer=document.getElementById('particles');
+for(let i=0;i<50;i++){
+  const p=document.createElement('div');
+  p.classList.add('particle');
+  p.style.left=Math.random()*100+'vw';
+  p.style.top=Math.random()*100+'vh';
+  p.style.width=p.style.height=(Math.random()*5+3)+'px';
+  p.style.animationDuration=(Math.random()*5+5)+'s';
+  particlesContainer.appendChild(p);
+}
+</script>
+</body>
+</html>
