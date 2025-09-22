@@ -3,242 +3,366 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Angry Bird ❤️</title>
+<title>For Ipshyta ❤️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* Reset */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI', 'Georgia', serif;}
-body{
-  background: linear-gradient(120deg,#667eea,#764ba2);
-  display:flex; justify-content:center; align-items:center; min-height:100vh;
-  overflow:hidden; color:white; perspective:1500px;
+/* --- Variables & Global Styles (Soft Pink Theme) --- */
+:root {
+  --main-pink: #ffc0cb;
+  --dark-pink: #d9a4b0;
+  --text-dark: #4a2135;
+  --bg-light: #fce4ec;
+  --card-bg: #fff0f5;
+  --border-color: #ffb6c1;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --transition-speed: 1s;
 }
 
-/* Particles Background */
-.particles{
-  position:absolute; width:100%; height:100%; overflow:hidden; z-index:-1;
-}
-.particle{
-  position:absolute; width:8px; height:8px; background:white; border-radius:50%;
-  opacity:0.8; animation:particleAnim 8s linear infinite;
-}
-@keyframes particleAnim{
-  0%{transform:translateY(100vh) translateX(0) scale(0.5); opacity:0;}
-  50%{opacity:0.9;}
-  100%{transform:translateY(-10vh) translateX(50vw) scale(1); opacity:0;}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Floating emojis */
-.emoji{
-  position:absolute; font-size:2.5rem; animation:float 5s ease-in-out infinite;
-}
-@keyframes float{
-  0%{transform:translateY(0) rotate(0deg);}
-  50%{transform:translateY(-50px) rotate(180deg);}
-  100%{transform:translateY(0) rotate(360deg);}
-}
-
-/* Container */
-.container{
-  width:95%; max-width:500px; position:relative; text-align:center;
-  animation:fadeInUp 1.5s ease forwards;
-}
-@keyframes fadeInUp{
-  0%{opacity:0; transform:translateY(50px) scale(0.9);}
-  100%{opacity:1; transform:translateY(0) scale(1);}
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-dark);
+  background: var(--bg-light);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
 }
 
-/* Header */
-.header{
-  margin-bottom:20px;
-}
-.header h1{
-  font-size:2.4rem; text-shadow:2px 2px 15px rgba(0,0,0,0.6);
-  animation:glow 2s ease-in-out infinite alternate, typing 3s steps(20) forwards;
-  overflow:hidden; white-space:nowrap; border-right:4px solid white;
-}
-.header p,#time-together{font-size:1rem; opacity:0.9; margin-top:5px;}
-@keyframes glow{
-  from {text-shadow:2px 2px 15px rgba(0,0,0,0.3),0 0 10px #fff;}
-  to {text-shadow:2px 2px 15px rgba(0,0,0,0.3),0 0 25px #fff;}
-}
-@keyframes typing{
-  from{width:0;}
-  to{width:100%;}
+/* --- The Card Container --- */
+.card-wrapper {
+  position: relative;
+  width: 90vw;
+  max-width: 700px;
+  height: 80vh;
+  max-height: 500px;
+  perspective: 1000px;
+  cursor: pointer;
+  transform: scale(0.9);
+  transition: transform 1s ease-in-out;
 }
 
-/* Cards */
-.cards-container{
-  position:relative; width:100%; height:550px; overflow:hidden;
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1.5s;
 }
-.card{
-  position:absolute; width:100%; height:100%;
-  background: rgba(255,255,255,0.08);
-  border-radius:25px;
-  padding:40px 25px;
-  display:flex; flex-direction:column; justify-content:center; align-items:center;
-  text-align:center;
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.2);
-  box-shadow:0 20px 60px rgba(0,0,0,0.5);
-  opacity:0; transform:translateX(100%) scale(0.9) rotateY(15deg);
-  transition: all 0.8s cubic-bezier(0.68,-0.55,0.27,1.55);
-}
-.card.active{
-  opacity:1; transform:translateX(0) scale(1) rotateY(0);
-  animation:cardBounce 0.6s ease;
-}
-.card.prev{
-  opacity:0.6; transform:translateX(-100%) scale(0.95) rotateY(-15deg);
-}
-.card:hover{
-  transform:scale(1.03) rotateY(2deg);
-  box-shadow:0 25px 70px rgba(0,0,0,0.7);
-}
-@keyframes cardBounce{
-  0%{transform:scale(0.95) translateY(-20px);}
-  50%{transform:scale(1.05) translateY(10px);}
-  100%{transform:scale(1) translateY(0);}
-}
-.card h2{font-size:1.9rem; margin-bottom:20px;}
-.card p{font-size:1.15rem; line-height:1.6; max-height:240px; overflow-y:auto; color:white;}
 
-/* Navigation */
-.navigation{
-  position:absolute; bottom:-70px; left:50%; transform:translateX(-50%); display:flex; gap:20px;
+.card.open {
+  transform: rotateY(-180deg);
 }
-.nav-btn{
-  width:55px; height:55px; border-radius:50%; border:none;
-  background: rgba(255,255,255,0.25); color:white; font-size:2rem; cursor:pointer;
-  transition:0.3s; backdrop-filter: blur(10px); box-shadow:0 5px 20px rgba(0,0,0,0.5);
+.card.open:not(:hover) {
+    cursor: auto;
 }
-.nav-btn:hover{
-  background: rgba(255,255,255,0.5); transform:scale(1.25) rotate(10deg);
-}
-.indicators{
-  position:absolute; bottom:-110px; left:50%; transform:translateX(-50%);
-  display:flex; gap:14px;
-}
-.indicator{
-  width:15px; height:15px; border-radius:50%; background:rgba(255,255,255,0.4);
-  cursor:pointer; transition:all 0.3s ease;
-}
-.indicator.active{background:white; transform:scale(1.5);}
 
-/* Responsive */
-@media(max-width:480px){
-  .container{max-width:360px;}
-  .card{padding:30px 20px;}
-  .card h2{font-size:1.6rem;}
-  .card p{font-size:1rem;}
+/* --- Card Front & Back --- */
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.card-front {
+  background: var(--card-bg);
+  border: 4px solid var(--border-color);
+  z-index: 2;
+  transform: rotateY(0deg);
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+}
+.card-front h1 {
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  color: var(--dark-pink);
+  margin-bottom: 1rem;
+}
+.card-front p {
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  opacity: 0.8;
+}
+
+.card-back {
+  background: var(--card-bg);
+  transform: rotateY(-180deg);
+  z-index: 1;
+  position: relative;
+  border: 4px solid var(--border-color);
+}
+
+/* --- Card Back Content (Fading Cards) --- */
+.message-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+.message-card.active {
+  opacity: 1;
+}
+.message-card.active h2,
+.message-card.active p {
+  animation: fadeInUp 1s forwards;
+}
+
+.message-card h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.5rem, 6vw, 2.5rem);
+  margin-bottom: 1rem;
+  color: var(--dark-pink);
+}
+.message-card p {
+  font-size: clamp(0.9rem, 3vw, 1.05rem);
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+/* --- Navigation Buttons --- */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--main-pink);
+  border: none;
+  color: var(--text-dark);
+  font-size: 2rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.3s;
+  z-index: 10;
+}
+.nav-btn:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+#prevBtn { left: -20px; }
+#nextBtn { right: -20px; }
+.nav-btn.hidden { display: none; }
+
+/* --- Counter inside the card --- */
+.counter {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 0.8rem;
+  color: var(--text-dark);
+  opacity: 0.7;
+}
+
+/* --- Final Message after Card Closes --- */
+.final-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease-in-out;
+  font-size: clamp(1.2rem, 5vw, 2rem);
+  font-family: 'Dancing Script', cursive;
+  color: var(--text-dark);
+  text-shadow: 1px 1px 5px var(--main-pink);
+}
+.final-message.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- Animations --- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Responsive Design --- */
+@media(max-width: 768px) {
+  .nav-btn {
+    padding: 0.3rem 0.7rem;
+    font-size: 1.5rem;
+  }
+  #prevBtn { left: 5px; }
+  #nextBtn { right: 5px; }
 }
 </style>
 </head>
 <body>
 
-<!-- Particles -->
-<div class="particles" id="particles"></div>
-
-<!-- Floating emojis -->
-<div class="emoji" style="top:10%; left:20%;">🍯</div>
-<div class="emoji" style="top:30%; left:70%;">🎀</div>
-<div class="emoji" style="top:60%; left:25%;">❤️</div>
-<div class="emoji" style="top:80%; left:60%;">🍯</div>
-
-<div class="container">
-  <div class="header">
-    <h1>For My Angry Bird ❤️</h1>
-    <p>From 1:05 AM, 20 Sept 2025</p>
-    <p id="time-together">Loading time together...</p>
-  </div>
-
-  <div class="cards-container">
-    <div class="card active">
-      <h2>Our Memories 🍯🎀</h2>
-      <p>I never let you sleep :) like I never did. The day we met first? After 3 years, made me fall in love with you again. Sitting with you alone makes me feel so comfortable and safe.</p>
+<div class="card-wrapper" id="cardWrapper">
+  <div class="card" id="card">
+    <div class="card-face card-front" id="cardFront">
+      <h1>Hey Ipshyta ❤️</h1>
+      <p>Click to Open!</p>
     </div>
-    <div class="card">
-      <h2>Fun Moments 🍯🎀</h2>
-      <p>Talking and teasing you on that rainy night was unforgettable. Your “Vidit chup reh” messages make me smile every time. Even when you prank me, it’s totally worth it.</p>
+    <div class="card-face card-back" id="cardBack">
+      <div id="messageContainer">
+        </div>
+      <button class="nav-btn" id="prevBtn">‹</button>
+      <button class="nav-btn" id="nextBtn">›</button>
+      <div class="counter" id="counter"></div>
     </div>
-    <div class="card">
-      <h2>Care & Love 🍯🎀</h2>
-      <p>I promise to always support you, care for you, and never hurt you. Your happiness is my priority, and I will be there through every moment.</p>
-    </div>
-    <div class="card">
-      <h2>Forever Us 🍯🎀</h2>
-      <p>From that exact moment on 20 Sept, we created something special. All our small jokes, chats, and pranks are treasures. Every “Honey” and “Bow” from you brightens my day.</p>
-    </div>
-  </div>
-
-  <div class="navigation">
-    <button class="nav-btn" onclick="prevCard()">‹</button>
-    <button class="nav-btn" onclick="nextCard()">›</button>
-  </div>
-
-  <div class="indicators">
-    <div class="indicator active" onclick="goToCard(0)"></div>
-    <div class="indicator" onclick="goToCard(1)"></div>
-    <div class="indicator" onclick="goToCard(2)"></div>
-    <div class="indicator" onclick="goToCard(3)"></div>
   </div>
 </div>
 
+<div class="final-message" id="finalMessage">
+  If you ever feel something wrong, then remember I wait the most
+</div>
+
 <script>
-// Cards
-let currentCard=0;
-const cards=document.querySelectorAll('.card');
-const indicators=document.querySelectorAll('.indicator');
-const totalCards=cards.length;
-function showCard(index){
-  cards.forEach((card,i)=>{
-    card.classList.remove('active','prev');
-    if(i===index) card.classList.add('active');
-    else if(i<index) card.classList.add('prev');
+document.addEventListener("DOMContentLoaded", function() {
+  const card = document.getElementById('card');
+  const cardWrapper = document.getElementById('cardWrapper');
+  const counterElement = document.getElementById('counter');
+  const messageContainer = document.getElementById('messageContainer');
+  const finalMessage = document.getElementById('finalMessage');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  
+  // A place to keep track of the current message
+  let currentIndex = 0;
+  let isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  // All the messages for the cards
+  const messages = [
+    { title: "Your Smile", content: "Your smile has a magic all its own. In a single moment, it can brighten the darkest of days and lift my spirits no matter what. It's my favorite sight in the world, a simple joy that always reminds me of how happy you make me, and how a simple curve of your lips can change my entire outlook on life. It's a genuine beacon of light that I am forever grateful for, and a constant source of comfort for me." },
+    { title: "Your Attitude", content: "There's a beautiful confidence in your attitude that I admire. It's that fierce, independent spirit that drew me to you. You stand your ground and know your worth, and that part of you is what makes you so incredibly powerful and amazing. This strong personality is a part of what makes you, you; it’s a constant inspiration that pushes me to be better and to stand tall alongside you. It’s a quality that I find endlessly captivating." },
+    { title: "Angry Bird 🍯🎀", content: `Your anger is a storm I've learned to respect, a fierce expression of how much you care. While it can be intimidating, I see the passion behind it, and that's the side of you I love most. It's part of the beautiful, powerful woman I fell for, a sign of your fire and a testament to your deeply held beliefs and principles. It's a side of you that, while dangerous, shows just how much heart you have and how fiercely you protect what you believe in.
+    I do melt when say "B*L chup reh" / "Maar jhayega fr" and doesn't hurt LOL -_-`},
+    { title: "Your Ignorance", content: "When you don't notice me, it's a feeling of pure sadness. Your attention means the world to me, and to be without it, even for a moment, feels like a piece of my world is missing. It’s a simple reminder of how much your love matters, and how your presence is a constant comfort. The times you are absorbed in your own world only make your moments of focus on me that much more meaningful and cherished, because I know your attention is the most valuable thing you can give." },
+    { title: "Your Absence", content: "When you're not here, I feel a void that nothing else can fill. It’s not just a feeling of being alone, but of being truly unsupported. Your presence is the anchor that grounds me, and I miss you the moment you are gone. The quiet moments are a reminder of how much joy you bring and how much of my life is built around the feeling of having you by my side. My world feels incomplete without you in it." },
+    { title: "Your Presence", content: "Your presence is my everything. When you’re by my side, I feel completely safe and whole. It’s a feeling of pure happiness, a comforting warmth that fills my entire world. With you here, I know I can face anything. Your laughter, your voice, and your simple presence are the most beautiful parts of my day, and the most reassuring feeling I've ever known. It is my greatest comfort, and I am so lucky to have you near me." }
+  ];
+
+  // A little time-tracker to show how long you've been "us"
+  const startDate = new Date('September 20, 2025 01:05:00');
+  function updateCounter() {
+    const now = new Date();
+    const diff = now - startDate;
+    const seconds = Math.floor(diff / 1000) % 60;
+    const minutes = Math.floor(diff / (1000 * 60)) % 60;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    counterElement.textContent = `Time together: ${days}d, ${minutes}m, ${seconds}s`;
+  }
+  // Start the timer
+  setInterval(updateCounter, 1000);
+  updateCounter();
+
+  // Create all the message cards from the data
+  messages.forEach((msg, index) => {
+    const cardDiv = document.createElement('div');
+    cardDiv.className = 'message-card';
+    cardDiv.dataset.index = index;
+    cardDiv.innerHTML = `<h2>${msg.title}</h2><p>${msg.content}</p>`;
+    messageContainer.appendChild(cardDiv);
   });
-  indicators.forEach((ind,i)=>ind.classList.toggle('active',i===index));
-  currentCard=index;
-}
-function nextCard(){showCard((currentCard+1)%totalCards);}
-function prevCard(){showCard((currentCard-1+totalCards)%totalCards);}
-function goToCard(index){showCard(index);}
+  const messageCards = document.querySelectorAll('.message-card');
+  
+  // Show the first card when the page loads
+  showCard(0);
 
-// Swipe
-let startX=0,endX=0;
-document.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;});
-document.addEventListener('touchend',e=>{
-  endX=e.changedTouches[0].clientX;
-  const diff=startX-endX;
-  if(Math.abs(diff)>50){if(diff>0) nextCard(); else prevCard();}
+  // This is the cool part: the card opens!
+  cardWrapper.addEventListener('click', () => {
+    card.classList.add('open');
+  }, { once: true }); // Only runs once, so the card stays open
+
+  // Function to show a specific message card
+  function showCard(index) {
+    messageCards.forEach((card, i) => {
+      card.classList.remove('active');
+    });
+    messageCards[index].classList.add('active');
+    
+    // Hide or show the nav buttons
+    prevBtn.classList.toggle('hidden', index === 0);
+    nextBtn.classList.toggle('hidden', index === messages.length - 1);
+    
+    currentIndex = index;
+  }
+
+  // Go to the next card
+  function nextCard() {
+    if (currentIndex < messages.length - 1) {
+      showCard(currentIndex + 1);
+    } else {
+      // If we're at the last card, close the whole thing
+      card.classList.remove('open');
+      setTimeout(() => {
+        finalMessage.classList.add('active');
+      }, 1500); // Wait for the card to finish closing
+    }
+  }
+
+  nextBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    nextCard();
+  });
+
+  // Go to the previous card
+  prevBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (currentIndex > 0) {
+      showCard(currentIndex - 1);
+    }
+  });
+
+  // Shake-to-advance feature for mobile
+  if (isMobile) {
+    let lastX = 0, lastY = 0, lastZ = 0;
+    let shakeThreshold = 15;
+    let cooldown = false;
+
+    if (window.DeviceMotionEvent) {
+        window.addEventListener('devicemotion', (event) => {
+            if (cooldown || !card.classList.contains('open')) return;
+
+            const acceleration = event.accelerationIncludingGravity;
+            const deltaX = Math.abs(acceleration.x - lastX);
+            const deltaY = Math.abs(acceleration.y - lastY);
+            const deltaZ = Math.abs(acceleration.z - lastZ);
+            
+            if ((deltaX > shakeThreshold && deltaY > shakeThreshold) || (deltaX > shakeThreshold && deltaZ > shakeThreshold) || (deltaY > shakeThreshold && deltaZ > shakeThreshold)) {
+                cooldown = true;
+                nextCard();
+                setTimeout(() => {
+                    cooldown = false;
+                }, 1000); // 1 second cooldown
+            }
+
+            lastX = acceleration.x;
+            lastY = acceleration.y;
+            lastZ = acceleration.z;
+        });
+    }
+  }
 });
-
-// Keyboard
-document.addEventListener('keydown',e=>{if(e.key==='ArrowRight') nextCard(); if(e.key==='ArrowLeft') prevCard();});
-
-// Live time together
-const startTime=new Date('2025-09-20T01:05:00');
-const timeDisplay=document.getElementById('time-together');
-function updateTimeTogether(){
-  let diff=new Date()-startTime;
-  const days=Math.floor(diff/(1000*60*60*24)); diff-=days*(1000*60*60*24);
-  const hours=Math.floor(diff/(1000*60*60)); diff-=hours*(1000*60*60);
-  const minutes=Math.floor(diff/(1000*60)); diff-=minutes*(1000*60);
-  const seconds=Math.floor(diff/1000);
-  timeDisplay.textContent=`Together for ${days}d ${hours}h ${minutes}m ${seconds}s ❤️`;
-}
-setInterval(updateTimeTogether,1000);
-updateTimeTogether();
-
-// Particles
-const particlesContainer=document.getElementById('particles');
-for(let i=0;i<50;i++){
-  const p=document.createElement('div');
-  p.classList.add('particle');
-  p.style.left=Math.random()*100+'vw';
-  p.style.top=Math.random()*100+'vh';
-  p.style.width=p.style.height=(Math.random()*5+3)+'px';
-  p.style.animationDuration=(Math.random()*5+5)+'s';
-  particlesContainer.appendChild(p);
-}
 </script>
+
 </body>
 </html>
