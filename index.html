@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Ipshyta ❤️</title>
+<title>For My Pookie Ipshyta ❤️</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* --- Variables & Global Styles (Soft Pink Theme) --- */
+/* --- A palette of sweet, pookie colors --- */
 :root {
   --main-pink: #ffc0cb;
   --dark-pink: #d9a4b0;
@@ -16,16 +16,11 @@
   --bg-light: #fce4ec;
   --card-bg: #fff0f5;
   --border-color: #ffb6c1;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.15);
   --transition-speed: 1s;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* A soft, welcoming background */
 body {
   font-family: 'Poppins', sans-serif;
   color: var(--text-dark);
@@ -38,7 +33,7 @@ body {
   position: relative;
 }
 
-/* --- The Card Container --- */
+/* The magic box that holds the card */
 .card-wrapper {
   position: relative;
   width: 90vw;
@@ -51,6 +46,7 @@ body {
   transition: transform 1s ease-in-out;
 }
 
+/* The card itself, ready to fold */
 .card {
   width: 100%;
   height: 100%;
@@ -59,14 +55,17 @@ body {
   transition: transform 1.5s;
 }
 
+/* The little twist to make it open */
 .card.open {
   transform: rotateY(-180deg);
 }
+
+/* No more pointer when it's open */
 .card.open:not(:hover) {
     cursor: auto;
 }
 
-/* --- Card Front & Back --- */
+/* --- The front of the card, with all its welcome animations --- */
 .card-face {
   position: absolute;
   width: 100%;
@@ -88,17 +87,35 @@ body {
   transform: rotateY(0deg);
   font-family: 'Dancing Script', cursive;
   text-align: center;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+  animation-delay: 0.5s;
 }
 .card-front h1 {
   font-size: clamp(2rem, 8vw, 3.5rem);
   color: var(--dark-pink);
   margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+  animation-delay: 1.5s;
 }
 .card-front p {
   font-size: clamp(1rem, 4vw, 1.2rem);
-  opacity: 0.8;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+  animation-delay: 2.5s;
 }
 
+/* A soft glow for the heart */
+.heart {
+  display: inline-block;
+  color: var(--dark-pink);
+  animation: pulse 1s infinite alternate;
+}
+
+/* --- The back of the card, holding the messages --- */
 .card-back {
   background: var(--card-bg);
   transform: rotateY(-180deg);
@@ -107,7 +124,7 @@ body {
   border: 4px solid var(--border-color);
 }
 
-/* --- Card Back Content (Fading Cards) --- */
+/* The individual message cards that fade in and out */
 .message-card {
   position: absolute;
   top: 0;
@@ -120,14 +137,15 @@ body {
   justify-content: center;
   align-items: center;
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.7s ease-in-out;
 }
 .message-card.active {
   opacity: 1;
 }
 .message-card.active h2,
 .message-card.active p {
-  animation: fadeInUp 1s forwards;
+  animation: cardFadeIn 1s forwards;
+  animation-delay: 0.2s;
 }
 
 .message-card h2 {
@@ -142,7 +160,7 @@ body {
   max-width: 500px;
 }
 
-/* --- Navigation Buttons --- */
+/* --- The navigation buttons --- */
 .nav-btn {
   position: absolute;
   top: 50%;
@@ -166,7 +184,7 @@ body {
 #nextBtn { right: -20px; }
 .nav-btn.hidden { display: none; }
 
-/* --- Counter inside the card --- */
+/* The little counter at the corner */
 .counter {
   position: absolute;
   top: 20px;
@@ -176,33 +194,50 @@ body {
   opacity: 0.7;
 }
 
-/* --- Final Message after Card Closes --- */
-.final-message {
+/* --- The final message that appears at the end --- */
+.final-message-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  max-width: 90%;
+}
+
+.final-message {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 1.5s ease-in-out;
+  transition: opacity 2s ease-in-out;
   font-size: clamp(1.2rem, 5vw, 2rem);
   font-family: 'Dancing Script', cursive;
   color: var(--text-dark);
   text-shadow: 1px 1px 5px var(--main-pink);
+  padding: 20px;
 }
 .final-message.active {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* --- Animations --- */
+/* --- All the lovely animations --- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+@keyframes pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
 
-/* --- Responsive Design --- */
+/* --- Responsive adjustments for smaller screens --- */
 @media(max-width: 768px) {
   .nav-btn {
     padding: 0.3rem 0.7rem;
@@ -218,8 +253,8 @@ body {
 <div class="card-wrapper" id="cardWrapper">
   <div class="card" id="card">
     <div class="card-face card-front" id="cardFront">
-      <h1>Hey Ipshyta ❤️</h1>
-      <p>Click to Open!</p>
+      <h1>Hey Ipshyta <span class="heart">❤️</span></h1>
+      <p>Click me to open!</p>
     </div>
     <div class="card-face card-back" id="cardBack">
       <div id="messageContainer">
@@ -231,8 +266,10 @@ body {
   </div>
 </div>
 
-<div class="final-message" id="finalMessage">
-  If you ever feel something wrong, then remember I wait the most
+<div class="final-message-container">
+  <div class="final-message" id="finalMessage">
+    If you ever feel something wrong just remember I waited for you the most, Cared for you no matter the situation was, I kept my promises come true!
+  </div>
 </div>
 
 <script>
@@ -245,22 +282,25 @@ document.addEventListener("DOMContentLoaded", function() {
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   
-  // A place to keep track of the current message
+  // This will keep track of which message we're on
   let currentIndex = 0;
-  let isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  
+  // Checking if we're on a mobile device for the shake feature
+  const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-  // All the messages for the cards
+  // The lovely messages for the cards
   const messages = [
     { title: "Your Smile", content: "Your smile has a magic all its own. In a single moment, it can brighten the darkest of days and lift my spirits no matter what. It's my favorite sight in the world, a simple joy that always reminds me of how happy you make me, and how a simple curve of your lips can change my entire outlook on life. It's a genuine beacon of light that I am forever grateful for, and a constant source of comfort for me." },
     { title: "Your Attitude", content: "There's a beautiful confidence in your attitude that I admire. It's that fierce, independent spirit that drew me to you. You stand your ground and know your worth, and that part of you is what makes you so incredibly powerful and amazing. This strong personality is a part of what makes you, you; it’s a constant inspiration that pushes me to be better and to stand tall alongside you. It’s a quality that I find endlessly captivating." },
     { title: "Angry Bird 🍯🎀", content: `Your anger is a storm I've learned to respect, a fierce expression of how much you care. While it can be intimidating, I see the passion behind it, and that's the side of you I love most. It's part of the beautiful, powerful woman I fell for, a sign of your fire and a testament to your deeply held beliefs and principles. It's a side of you that, while dangerous, shows just how much heart you have and how fiercely you protect what you believe in.
-    I do melt when say "B*L chup reh" / "Maar jhayega fr" and doesn't hurt LOL -_-`},
+    
+    I do melt when say "B*L chup reh" / "Maar jhayega fr" and doesn't hurt me LOL -__-`},
     { title: "Your Ignorance", content: "When you don't notice me, it's a feeling of pure sadness. Your attention means the world to me, and to be without it, even for a moment, feels like a piece of my world is missing. It’s a simple reminder of how much your love matters, and how your presence is a constant comfort. The times you are absorbed in your own world only make your moments of focus on me that much more meaningful and cherished, because I know your attention is the most valuable thing you can give." },
     { title: "Your Absence", content: "When you're not here, I feel a void that nothing else can fill. It’s not just a feeling of being alone, but of being truly unsupported. Your presence is the anchor that grounds me, and I miss you the moment you are gone. The quiet moments are a reminder of how much joy you bring and how much of my life is built around the feeling of having you by my side. My world feels incomplete without you in it." },
     { title: "Your Presence", content: "Your presence is my everything. When you’re by my side, I feel completely safe and whole. It’s a feeling of pure happiness, a comforting warmth that fills my entire world. With you here, I know I can face anything. Your laughter, your voice, and your simple presence are the most beautiful parts of my day, and the most reassuring feeling I've ever known. It is my greatest comfort, and I am so lucky to have you near me." }
   ];
 
-  // A little time-tracker to show how long you've been "us"
+  // The timer for how long you've been "us"
   const startDate = new Date('September 20, 2025 01:05:00');
   function updateCounter() {
     const now = new Date();
@@ -270,11 +310,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     counterElement.textContent = `Time together: ${days}d, ${minutes}m, ${seconds}s`;
   }
-  // Start the timer
+  // Let the timer begin!
   setInterval(updateCounter, 1000);
   updateCounter();
 
-  // Create all the message cards from the data
+  // Creating the message cards from our messages
   messages.forEach((msg, index) => {
     const cardDiv = document.createElement('div');
     cardDiv.className = 'message-card';
@@ -284,47 +324,47 @@ document.addEventListener("DOMContentLoaded", function() {
   });
   const messageCards = document.querySelectorAll('.message-card');
   
-  // Show the first card when the page loads
+  // The first card should be ready to be seen
   showCard(0);
 
-  // This is the cool part: the card opens!
+  // The grand opening on click
   cardWrapper.addEventListener('click', () => {
     card.classList.add('open');
-  }, { once: true }); // Only runs once, so the card stays open
+  }, { once: true });
 
-  // Function to show a specific message card
+  // A little helper function to show the right card
   function showCard(index) {
     messageCards.forEach((card, i) => {
       card.classList.remove('active');
     });
     messageCards[index].classList.add('active');
     
-    // Hide or show the nav buttons
     prevBtn.classList.toggle('hidden', index === 0);
     nextBtn.classList.toggle('hidden', index === messages.length - 1);
     
     currentIndex = index;
   }
 
-  // Go to the next card
+  // A little helper function to go to the next card
   function nextCard() {
     if (currentIndex < messages.length - 1) {
       showCard(currentIndex + 1);
     } else {
-      // If we're at the last card, close the whole thing
+      // If we're at the very end, let's close the card and show the final message
       card.classList.remove('open');
       setTimeout(() => {
         finalMessage.classList.add('active');
-      }, 1500); // Wait for the card to finish closing
+      }, 1500); // Waiting for the card to fold back
     }
   }
 
+  // Clicking the next button
   nextBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     nextCard();
   });
 
-  // Go to the previous card
+  // Clicking the previous button
   prevBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (currentIndex > 0) {
@@ -332,7 +372,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // Shake-to-advance feature for mobile
+  // The cool shake-to-advance feature for phones
   if (isMobile) {
     let lastX = 0, lastY = 0, lastZ = 0;
     let shakeThreshold = 15;
@@ -352,7 +392,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 nextCard();
                 setTimeout(() => {
                     cooldown = false;
-                }, 1000); // 1 second cooldown
+                }, 1000);
             }
 
             lastX = acceleration.x;
