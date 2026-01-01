@@ -5,31 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ipshita</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{
-  height:100%;
-  font-family:'Montserrat',sans-serif;
-  background:#000;
-  color:#fff;
-  overflow:hidden;
-}
+html,body{height:100%;font-family:'Inter',sans-serif;background:#000;color:#fff}
 
-/* BACKGROUND */
+/* ---------- BACKGROUND ---------- */
 .bg{
   position:fixed;
   inset:0;
   background:
-    linear-gradient(to bottom,rgba(0,0,0,.3),rgba(0,0,0,.85)),
+    linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.85)),
     url("Screenshot_20260101_235408_Instagram Lite.jpg") center/cover no-repeat;
-  transform:scale(1.15);
-  transition:transform 6s ease, filter 6s ease;
-  z-index:-1;
+  transform:scale(1.2);
+  filter:brightness(.9);
+  transition:filter 4s ease;
+  z-index:-2;
 }
 
-/* PASSWORD */
+/* ---------- PASSWORD ---------- */
 .lock{
   position:fixed;
   inset:0;
@@ -40,96 +35,96 @@ html,body{
   background:#000;
   z-index:50;
 }
+.lock h3{opacity:.7;font-weight:300;margin-bottom:20px}
 .lock input{
   padding:14px 28px;
-  border-radius:30px;
+  border-radius:40px;
   border:none;
   font-size:18px;
 }
 .lock button{
   margin-top:14px;
-  padding:12px 36px;
-  border-radius:30px;
+  padding:12px 40px;
+  border-radius:40px;
   border:none;
+  font-weight:600;
   cursor:pointer;
 }
 
-/* SCROLLER */
+/* ---------- SCROLL ---------- */
 .wrapper{
   height:100vh;
   overflow-y:auto;
-  display:none;
   scroll-behavior:smooth;
+  display:none;
 }
 
-/* SCENES */
-.scene{
+/* ---------- SECTIONS ---------- */
+section{
   min-height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   padding:40px;
   text-align:center;
 }
 
-.big{
-  font-size:64px;
-  font-weight:700;
-  animation:fadeUp 1s ease forwards;
+/* ---------- ACT 1 ---------- */
+.hero{
+  font-size:clamp(42px,8vw,96px);
+  font-weight:900;
+  letter-spacing:-2px;
+  animation:pop 1s cubic-bezier(.19,1,.22,1) forwards;
+}
+.sub{
+  margin-top:20px;
+  font-size:18px;
+  letter-spacing:6px;
+  opacity:.7;
 }
 
-.medium{
-  font-size:34px;
-  font-weight:500;
-  opacity:0;
-  animation:fadeUp 1.2s ease forwards;
-}
-
-.small{
-  font-size:22px;
-  font-weight:300;
+/* ---------- ACT 2 ---------- */
+.text{
   max-width:900px;
-  line-height:1.9;
+  font-size:clamp(18px,2.4vw,26px);
+  line-height:2;
   opacity:0;
-  animation:fadeUp 1.4s ease forwards;
+  transform:translateY(40px);
+  transition:1.2s ease;
+}
+.text.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
-.split span{
-  display:inline-block;
-  animation:slideWord .8s ease forwards;
-}
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-@keyframes slideWord{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-/* FLAME END */
+/* ---------- ACT 3 ---------- */
 .end{
   flex-direction:column;
 }
 
 .flame{
-  width:20px;
-  height:34px;
-  background:radial-gradient(circle,#ffd27d,#ff8c00);
+  width:24px;
+  height:44px;
+  background:radial-gradient(circle,#ffe29a,#ff7b00);
   border-radius:50%;
-  animation:flicker .15s infinite alternate;
-  margin-bottom:16px;
-  transition:all 2s ease;
+  animation:flicker .12s infinite alternate;
+  transition:all 3s ease;
 }
 
 @keyframes flicker{
   from{transform:scale(1)}
-  to{transform:scale(1.2)}
+  to{transform:scale(1.25)}
 }
 
-.fadeBlack{
+.final{
+  margin-top:30px;
+  font-size:20px;
+  opacity:0;
+  transition:2s ease;
+}
+
+/* ---------- BLACKOUT ---------- */
+.black{
   position:fixed;
   inset:0;
   background:#000;
@@ -138,11 +133,15 @@ html,body{
   pointer-events:none;
 }
 
-/* MOBILE */
+/* ---------- ANIM ---------- */
+@keyframes pop{
+  from{opacity:0;transform:scale(.85)}
+  to{opacity:1;transform:scale(1)}
+}
+
+/* ---------- MOBILE ---------- */
 @media(max-width:600px){
-  .big{font-size:38px}
-  .medium{font-size:24px}
-  .small{font-size:18px}
+  .sub{font-size:14px}
 }
 </style>
 </head>
@@ -150,7 +149,7 @@ html,body{
 <body>
 
 <div class="bg" id="bg"></div>
-<div class="fadeBlack" id="fade"></div>
+<div class="black" id="black"></div>
 
 <!-- PASSWORD -->
 <div class="lock" id="lock">
@@ -161,58 +160,53 @@ html,body{
 
 <div class="wrapper" id="wrap">
 
-<!-- SCENE 1 -->
-<div class="scene">
-  <div class="big">Happy 16th Birthday</div>
-</div>
+<!-- ACT 1 -->
+<section>
+  <div>
+    <div class="hero">Happy 16th Birthday</div>
+    <div class="sub">IPSHITA</div>
+  </div>
+</section>
 
-<!-- SCENE 2 -->
-<div class="scene">
-  <div class="medium">Ipshita</div>
-</div>
-
-<!-- SCENE 3 -->
-<div class="scene">
-  <div class="small">
+<!-- ACT 2 -->
+<section>
+  <div class="text reveal">
     Congratulations on completing 16 years of strength,
-    courage, and growth.
+    growth, and courage.
   </div>
-</div>
+</section>
 
-<!-- SCENE 4 -->
-<div class="scene">
-  <div class="small">
-    You always dreamed of becoming a lawyer —
-    fighting for what is right,
-    and one day ending your journey as a judge.
-    I genuinely believe you will.
+<section>
+  <div class="text reveal">
+    You’ve always dreamed of becoming a lawyer —
+    fighting for what is right —
+    and one day standing proudly as a judge.
+    I believe you will.
   </div>
-</div>
+</section>
 
-<!-- SCENE 5 -->
-<div class="scene">
-  <div class="small">
+<section>
+  <div class="text reveal">
     Even though life placed us on different paths,
-    the memories we made —
+    the memories —
     the fun, the madness —
-    will always stay.
+    they stay.
   </div>
-</div>
+</section>
 
-<!-- SCENE 6 -->
-<div class="scene">
-  <div class="small">
+<section>
+  <div class="text reveal">
     I wish you success, peace,
-    and that you end up with the boy you always dreamed of —
-    someone who truly understands you.
+    and that you end up with the boy
+    you always dreamed of.
   </div>
-</div>
+</section>
 
-<!-- END -->
-<div class="scene end" id="end">
+<!-- ACT 3 -->
+<section class="end" id="end">
   <div class="flame" id="flame"></div>
-  <div class="small">Best wishes — vdt</div>
-</div>
+  <div class="final" id="final">Best wishes — vdt</div>
+</section>
 
 </div>
 
@@ -224,24 +218,33 @@ function unlock(){
   } else alert("Wrong password");
 }
 
-/* END EFFECT */
+/* reveal text */
+const texts=document.querySelectorAll(".reveal");
+const io=new IntersectionObserver(e=>{
+  e.forEach(x=>x.isIntersecting && x.target.classList.add("show"));
+},{threshold:.6});
+texts.forEach(t=>io.observe(t));
+
+/* end */
 const end=document.getElementById("end");
 const flame=document.getElementById("flame");
-const fade=document.getElementById("fade");
+const black=document.getElementById("black");
 const bg=document.getElementById("bg");
+const final=document.getElementById("final");
 
-const obs=new IntersectionObserver(e=>{
+const endObs=new IntersectionObserver(e=>{
   if(e[0].isIntersecting){
     setTimeout(()=>{
       flame.style.transform="scale(0)";
       flame.style.opacity="0";
-      bg.style.filter="brightness(.5)";
-      fade.style.opacity="1";
-    },1200);
+      bg.style.filter="brightness(.6)";
+      black.style.opacity="1";
+      final.style.opacity="1";
+    },1500);
   }
 },{threshold:.8});
 
-obs.observe(end);
+endObs.observe(end);
 </script>
 
 </body>
