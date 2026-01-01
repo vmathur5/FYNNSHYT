@@ -3,40 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Ipshita</title>
+<title>For Ipshita</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
-body{
-  min-height:100vh;
-  font-family:'Poppins',sans-serif;
-  background:
-    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.85)),
-    url("Screenshot_20260101_235408_Instagram Lite.jpg") center/cover no-repeat;
-  animation:bgZoom 22s infinite alternate;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
+html,body{
+  scroll-behavior:smooth;
 }
 
-/* PASSWORD SCREEN */
+body{
+  font-family:'Poppins',sans-serif;
+  background:#000;
+  color:white;
+  overflow:hidden;
+}
+
+/* ===== PASSWORD ===== */
 .lock{
   position:fixed;
   inset:0;
   background:black;
   display:flex;
   flex-direction:column;
-  align-items:center;
   justify-content:center;
-  z-index:10;
-  text-align:center;
+  align-items:center;
+  z-index:100;
 }
-.lock h2{margin-bottom:15px;font-weight:300}
+.lock h2{
+  font-weight:300;
+  margin-bottom:20px;
+  opacity:.8;
+}
 .lock input{
   padding:15px 25px;
   border-radius:30px;
@@ -46,143 +46,155 @@ body{
 }
 .lock button{
   margin-top:15px;
-  padding:10px 30px;
-  border-radius:20px;
+  padding:12px 35px;
+  border-radius:30px;
   border:none;
   cursor:pointer;
 }
 
-/* MAIN CARD */
-.card{
-  max-width:900px;
-  width:95%;
-  padding:70px 65px;
-  background:rgba(255,255,255,.14);
-  backdrop-filter:blur(20px);
-  border-radius:35px;
-  box-shadow:0 40px 90px rgba(0,0,0,.7);
-  text-align:center;
+/* ===== SCROLL CONTAINER ===== */
+.wrapper{
+  height:100vh;
+  overflow-y:auto;
+  scroll-snap-type:y mandatory;
   display:none;
-  animation:enter 2s ease;
-  position:relative;
-  z-index:2;
 }
 
-h1{
-  font-family:'Playfair Display',serif;
-  font-size:54px;
-  margin-bottom:10px;
-  animation:glow 3s infinite alternate;
-}
-h2{
-  font-weight:300;
-  letter-spacing:3px;
-  margin-bottom:40px;
-}
-
-#text{
-  font-size:23px;
-  line-height:2.1;
-  letter-spacing:.3px;
-  white-space:pre-line;
-}
-
-.signature{
-  margin-top:35px;
-  text-align:right;
-  font-style:italic;
-  font-size:16px;
-}
-
-/* CANDLE */
-.candle-area{
-  margin-top:45px;
-  display:none;
-  flex-direction:column;
+/* ===== SECTIONS ===== */
+section{
+  min-height:100vh;
+  scroll-snap-align:start;
+  display:flex;
+  justify-content:center;
   align-items:center;
-  animation:fadeIn 2s forwards;
+  position:relative;
+  padding:80px 20px;
 }
-.candle{
-  width:40px;
-  height:90px;
-  background:linear-gradient(#fff,#eaeaea);
-  border-radius:8px;
+
+/* ===== BACKGROUND ===== */
+.bg{
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.85)),
+    url("Screenshot_20260101_235408_Instagram Lite.jpg") center/cover no-repeat;
+  transform:scale(1.05);
+  z-index:-1;
+  transition:transform 1s ease;
 }
-.flame{
-  width:18px;
-  height:30px;
-  background:radial-gradient(circle,#ffd27d,#ff9f1c);
-  border-radius:50%;
-  margin-bottom:-5px;
-  animation:flicker .3s infinite alternate;
+
+/* ===== HERO ===== */
+.hero{
+  text-align:center;
+  animation:fadeUp 2s ease;
 }
-.blow-text{
-  margin-top:10px;
-  font-size:14px;
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:64px;
+  letter-spacing:2px;
+}
+.hero h2{
+  margin-top:15px;
+  font-weight:300;
+  letter-spacing:4px;
   opacity:.8;
 }
 
-/* STARS & HEARTS */
-.star,.heart{
-  position:absolute;
-  animation:fall linear infinite;
+/* ===== GLASS CARD ===== */
+.card{
+  max-width:900px;
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(25px);
+  border-radius:40px;
+  padding:70px 65px;
+  box-shadow:0 50px 120px rgba(0,0,0,.7);
+  opacity:0;
+  transform:translateY(60px);
+  transition:1.4s cubic-bezier(.19,1,.22,1);
 }
-.star{
-  width:4px;height:4px;
-  background:white;
+.card.show{
+  opacity:1;
+  transform:translateY(0);
+}
+.card p{
+  font-size:23px;
+  line-height:2.1;
+  white-space:pre-line;
+}
+
+/* ===== CANDLE ===== */
+.candle-area{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.flame{
+  width:20px;
+  height:35px;
+  background:radial-gradient(circle,#ffd27d,#ff9f1c);
   border-radius:50%;
+  animation:flicker .25s infinite alternate;
 }
-.heart{
-  font-size:16px;
-  color:pink;
+.candle{
+  width:45px;
+  height:110px;
+  background:linear-gradient(#fff,#e6e6e6);
+  border-radius:10px;
+}
+.candle-area p{
+  margin-top:12px;
+  opacity:.7;
 }
 
-@keyframes fall{
-  from{transform:translateY(-10vh);opacity:0}
-  50%{opacity:1}
-  to{transform:translateY(110vh);opacity:0}
+/* ===== SIGNATURE ===== */
+.signature{
+  margin-top:50px;
+  text-align:right;
+  font-style:italic;
+  opacity:.8;
 }
 
+/* ===== PARTICLES ===== */
+.particle{
+  position:fixed;
+  width:2px;
+  height:2px;
+  background:white;
+  opacity:.15;
+  animation:float 15s linear infinite;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(50px)}
+  to{opacity:1;transform:translateY(0)}
+}
 @keyframes flicker{
   from{transform:scale(1)}
-  to{transform:scale(1.1)}
+  to{transform:scale(1.15)}
+}
+@keyframes float{
+  from{transform:translateY(110vh)}
+  to{transform:translateY(-10vh)}
 }
 
-@keyframes enter{
-  from{opacity:0;transform:scale(.85) translateY(80px)}
-  to{opacity:1;transform:scale(1)}
-}
-
-@keyframes glow{
-  from{text-shadow:0 0 15px gold}
-  to{text-shadow:0 0 40px gold}
-}
-
-@keyframes bgZoom{
-  from{background-size:100%}
-  to{background-size:112%}
-}
-
-@keyframes fadeIn{
-  from{opacity:0}
-  to{opacity:1}
-}
-
-/* MOBILE */
+/* ===== MOBILE ===== */
 @media(max-width:600px){
-  h1{font-size:38px}
-  #text{font-size:17px}
-  .card{padding:45px 28px}
+  .hero h1{font-size:40px}
+  .card{padding:45px 30px}
+  .card p{font-size:18px}
 }
 </style>
 </head>
 
 <body>
 
+<div class="bg" id="bg"></div>
+
 <!-- PASSWORD -->
 <div class="lock" id="lock">
   <h2>What was my name given by you ?</h2>
-  <input type="password" id="pass" placeholder="Answer">
+  <input type="password" id="pass">
   <button onclick="unlock()">Unlock</button>
 </div>
 
@@ -191,89 +203,90 @@ h2{
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- CARD -->
-<div class="card" id="card">
-  <h1>Happy 16th Birthday</h1>
-  <h2>Ipshita ✨</h2>
+<!-- SCROLL CONTENT -->
+<div class="wrapper" id="wrap">
 
-  <div id="text"></div>
-
-  <div class="candle-area" id="candle">
-    <div class="flame"></div>
-    <div class="candle"></div>
-    <p class="blow-text">Make a wish ✨</p>
+<section>
+  <div class="hero">
+    <h1>Happy 16th Birthday</h1>
+    <h2>Ipshita</h2>
   </div>
+</section>
 
-  <div class="signature">Best wishes — vdt</div>
+<section>
+  <div class="card" id="card1">
+    <p>
+Hey Ipshita,
+
+I wish you the happiest birthday and congratulations on completing
+16 beautiful years of your life — years shaped by strength, learning,
+and the courage to stand tall.
+
+I know your dream is to become a lawyer, to fight for what is right,
+and to one day stand proudly as a judge — respected, fearless,
+and confident. I truly believe you have what it takes.
+
+Even though we are not together because of life’s situations,
+you will always be remembered by me.
+The memories we made — the fun, the madness, the laughter —
+they’ll always stay.
+
+I wish you a future full of success and peace,
+and I hope you end up with the boy you always dreamed of —
+someone who supports you and stands beside you.
+
+May life be kind to you, and may you achieve everything
+you’ve worked for.
+    </p>
+
+    <div class="signature">Best wishes — vdt</div>
+  </div>
+</section>
+
+<section>
+  <div class="card show">
+    <div class="candle-area">
+      <div class="flame"></div>
+      <div class="candle"></div>
+      <p>Make a wish ✨</p>
+    </div>
+  </div>
+</section>
+
 </div>
 
 <script>
 function unlock(){
   if(document.getElementById("pass").value.toLowerCase()==="nachos"){
     document.getElementById("lock").style.display="none";
-    document.getElementById("card").style.display="block";
+    document.getElementById("wrap").style.display="block";
     document.getElementById("music").play();
-    typeText();
-    effects();
-  } else {
-    alert("Wrong answer 💔");
-  }
+    particles();
+  } else alert("Wrong answer");
 }
 
-/* TYPEWRITER TEXT */
-const msg = `Hey Ipshita,
+/* Reveal on scroll */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting)e.target.classList.add("show");
+  })
+},{threshold:.4});
 
-I wish you the happiest birthday and a heartfelt congratulations on
-completing 16 beautiful years of your life — years filled with struggles,
-strength, learning, and the courage to stand tall no matter what.
+document.querySelectorAll(".card").forEach(c=>observer.observe(c));
 
-I know your dream is to become a lawyer, to fight for what is right,
-to speak with confidence, and to one day end your journey proudly
-as a judge — respected, strong, and fearless.
-I truly believe you have that fire, that discipline,
-and that mindset to make it happen.
-
-Even though we are not together because of the situations in our lives,
-you will always be remembered by me.
-The memories we created — the fun, the madness,
-the laughter — they’ll always hold a quiet place in my heart.
-
-I wish you a future full of success, peace, and victories,
-and I hope you end up with the boy you always dreamed of —
-someone who understands you, supports your ambitions,
-and stands beside you with pride.
-
-May life be kind to you, and may you achieve everything
-you’ve ever worked for.`;
-
-let i=0;
-function typeText(){
-  if(i<msg.length){
-    document.getElementById("text").innerHTML += msg.charAt(i);
-    i++;
-    setTimeout(typeText,40);
-  } else {
-    document.getElementById("candle").style.display="flex";
-    setTimeout(()=>{
-      document.body.style.transition="2s";
-      document.body.style.opacity="0";
-    },15000);
-  }
-}
-
-/* STARS & HEARTS */
-function effects(){
+/* Particles */
+function particles(){
   setInterval(()=>{
-    let el=document.createElement("div");
-    el.className=Math.random()>.5?"star":"heart";
-    el.innerHTML="❤";
-    el.style.left=Math.random()*100+"vw";
-    el.style.animationDuration=5+Math.random()*5+"s";
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(),10000);
-  },300);
+    let p=document.createElement("div");
+    p.className="particle";
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDuration=10+Math.random()*10+"s";
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),20000);
+  },400);
 }
 </script>
 
 </body>
 </html>
+
