@@ -5,142 +5,139 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Ipshita</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{
   height:100%;
-  background:#000;
-  color:#fff;
-  font-family:'Inter',sans-serif;
+  background:#0b0b0d;
+  font-family:'Poppins',sans-serif;
   overflow:hidden;
+  color:#fff;
 }
 
-/* BACKGROUND */
+/* BACKGROUND IMAGE */
 .bg{
   position:fixed;
   inset:0;
   background:
-    linear-gradient(to bottom,rgba(0,0,0,.2),rgba(0,0,0,.9)),
+    radial-gradient(circle at top,rgba(255,220,200,.15),transparent 60%),
+    linear-gradient(to bottom,rgba(0,0,0,.2),rgba(0,0,0,.85)),
     url("Screenshot_20260101_235408_Instagram Lite.jpg") center/cover no-repeat;
-  transform:scale(1.25);
-  filter:blur(8px) brightness(.8);
-  animation:bgIn 2.5s ease forwards;
-  z-index:-2;
+  filter:brightness(.85);
+  animation:zoom 18s ease forwards;
 }
-@keyframes bgIn{
-  to{transform:scale(1.05);filter:blur(0) brightness(.9)}
+@keyframes zoom{
+  to{transform:scale(1.12)}
 }
 
-/* OVERLAY */
-.overlay{
-  position:fixed;
+/* GLASS CARD */
+.card{
+  position:absolute;
   inset:0;
-  background:rgba(0,0,0,.35);
-  z-index:-1;
-}
-
-/* CONTAINER */
-.container{
-  height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
-  text-align:center;
-  padding:40px;
+  justify-content:center;
+  padding:30px;
 }
 
-/* TEXT BLOCK */
-.block{
-  max-width:900px;
+.box{
+  max-width:880px;
+  padding:60px 50px;
+  border-radius:28px;
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(18px);
+  box-shadow:0 40px 120px rgba(0,0,0,.7);
+  text-align:center;
   opacity:0;
-  transform:translateY(20px);
-  transition:1s ease;
+  transform:translateY(30px);
+  transition:1.2s ease;
 }
-.block.show{
+
+.box.show{
   opacity:1;
   transform:translateY(0);
 }
 
 /* TEXT */
-.title{
+h1{
   font-family:'Playfair Display',serif;
   font-size:clamp(40px,7vw,78px);
+  margin-bottom:10px;
 }
-.name{
-  margin-top:10px;
+.sub{
   letter-spacing:5px;
-  opacity:.75;
-}
-.text{
-  font-size:clamp(18px,2.3vw,25px);
-  line-height:2;
-}
-.signature{
-  margin-top:30px;
-  font-style:italic;
   opacity:.7;
+  margin-bottom:35px;
+}
+p{
+  font-size:clamp(17px,2.3vw,24px);
+  line-height:2;
+  margin-bottom:28px;
 }
 
 /* FINAL PHOTO */
-.final-photo{
-  width:260px;
-  height:360px;
+.photo{
+  width:230px;
+  height:320px;
   margin:0 auto 30px;
-  border-radius:20px;
-  background:url("Screenshot_20260101_235408_Instagram Lite.jpg") center/cover no-repeat;
-  box-shadow:0 30px 80px rgba(0,0,0,.8);
-  animation:photoGlow 3s ease infinite alternate;
+  border-radius:18px;
+  background:url("Screenshot_20260101_235408_Instagram Lite.jpg") center/cover;
+  box-shadow:0 25px 70px rgba(255,200,160,.35);
+  animation:softGlow 4s ease-in-out infinite alternate;
 }
-@keyframes photoGlow{
-  to{box-shadow:0 40px 120px rgba(255,200,150,.3)}
+@keyframes softGlow{
+  to{box-shadow:0 35px 100px rgba(255,180,130,.55)}
 }
 
 /* CANDLES */
 .candles{
   display:flex;
   justify-content:center;
-  gap:8px;
-  margin-top:20px;
+  gap:7px;
+  margin-top:15px;
 }
 .candle{
-  width:8px;
-  height:50px;
-  background:#eee;
+  width:7px;
+  height:42px;
+  background:#f1f1f1;
   border-radius:4px;
   position:relative;
 }
 .flame{
   position:absolute;
-  top:-18px;
+  top:-15px;
   left:50%;
   transform:translateX(-50%);
-  width:10px;
-  height:18px;
-  background:radial-gradient(circle,#ffecb3,#ff9800,#ff5722);
-  border-radius:50% 50% 50% 50%;
-  animation:flicker .4s infinite alternate;
+  width:9px;
+  height:16px;
+  background:radial-gradient(circle,#fff3c4,#ffb74d,#ff7043);
+  border-radius:50%;
+  animation:flicker .35s infinite alternate;
 }
 @keyframes flicker{
-  to{transform:translateX(-50%) scaleY(1.2)}
+  to{transform:translateX(-50%) scaleY(1.15)}
 }
-
-/* EXTINGUISH */
 .extinguish .flame{
-  animation:none;
   opacity:0;
   transition:opacity 2s ease;
 }
 
-/* FADE OUT */
+/* SIGN */
+.sign{
+  margin-top:30px;
+  font-style:italic;
+  opacity:.65;
+}
+
+/* FADE */
 .fade{
   position:fixed;
   inset:0;
   background:#000;
   opacity:0;
   transition:opacity 4s ease;
-  pointer-events:none;
 }
 </style>
 </head>
@@ -148,75 +145,70 @@ html,body{
 <body>
 
 <div class="bg"></div>
-<div class="overlay"></div>
+<div class="card">
+  <div class="box" id="box"></div>
+</div>
 <div class="fade" id="fade"></div>
 
-<div class="container">
-  <div class="block" id="block"></div>
-</div>
-
 <script>
-const block = document.getElementById("block");
-const fade  = document.getElementById("fade");
+const box=document.getElementById("box");
+const fade=document.getElementById("fade");
 
-const scenes = [
-`<div class="title">Happy 16th Birthday</div>
- <div class="name">IPSHITA</div>`,
+const scenes=[
+`<h1>Happy 16th Birthday</h1>
+ <div class="sub">IPSHITA</div>`,
 
-`<div class="text">
-Sixteen years of strength, lessons, courage, and growth.
-Not every year was easy — and that’s what makes it powerful.
-</div>`,
+`<p>
+Sixteen years of becoming stronger,
+wiser, and braver — even when life was unfair.
+</p>`,
 
-`<div class="text">
-You dream of becoming a lawyer —
-standing for truth, justice, and your voice.
-And one day, ending your journey as a judge.
-I believe you will.
-</div>`,
+`<p>
+You dream of becoming a lawyer,
+standing for truth,
+and one day finishing your journey as a judge.
+You’re made for it.
+</p>`,
 
-`<div class="text">
+`<p>
 Life changed directions for us,
 but the memories —
-the laughter, the chaos —
-they still exist quietly.
-</div>`,
+the laughter, the madness —
+they still stay quietly.
+</p>`,
 
-`<div class="text">
-I wish you success, peace,
-and a future that treats you gently.
-And that you end up with the boy you always dreamed of —
-someone worthy of you.
-</div>`,
+`<p>
+I wish you a future filled with success,
+peace,
+and the boy you always dreamed of —
+someone who truly deserves you.
+</p>`,
 
-`<div class="final-photo"></div>
+`<div class="photo"></div>
  <div class="candles" id="candles">
-   ${'<div class="candle"><div class="flame"></div></div>'.repeat(16)}
+ ${'<div class="candle"><div class="flame"></div></div>'.repeat(16)}
  </div>
- <div class="signature">Best wishes — vdt</div>`
+ <div class="sign">Best wishes — vdt</div>`
 ];
 
 let i=0;
-
-function showScene(){
-  block.classList.remove("show");
+function next(){
+  box.classList.remove("show");
   setTimeout(()=>{
-    block.innerHTML=scenes[i];
-    block.classList.add("show");
+    box.innerHTML=scenes[i];
+    box.classList.add("show");
     i++;
-
     if(i<scenes.length){
-      setTimeout(showScene,2600);
+      setTimeout(next,2200);
     }else{
       setTimeout(()=>{
         document.getElementById("candles").classList.add("extinguish");
-        setTimeout(()=>fade.style.opacity="1",3000);
-      },3000);
+        setTimeout(()=>fade.style.opacity="1",2800);
+      },2600);
     }
-  },500);
+  },400);
 }
-
-setTimeout(showScene,1500);
+setTimeout(next,1000);
 </script>
 
 </body>
