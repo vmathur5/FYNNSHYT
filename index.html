@@ -3,23 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Ipshita</title>
+<title>Happy Birthday Ipshita</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
   min-height:100vh;
+  font-family:'Poppins',sans-serif;
   background:
-    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.8)),
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.85)),
     url("Screenshot_20260101_235408_Instagram Lite.jpg") center/cover no-repeat;
   animation:bgZoom 22s infinite alternate;
-  font-family:'Poppins',sans-serif;
   overflow:hidden;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   color:white;
 }
 
@@ -30,44 +31,47 @@ body{
   background:black;
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   z-index:10;
+  text-align:center;
 }
+.lock h2{margin-bottom:15px;font-weight:300}
 .lock input{
-  padding:15px 20px;
+  padding:15px 25px;
   border-radius:30px;
   border:none;
   font-size:18px;
-  margin-top:15px;
   text-align:center;
 }
 .lock button{
   margin-top:15px;
-  padding:10px 25px;
+  padding:10px 30px;
   border-radius:20px;
   border:none;
   cursor:pointer;
 }
 
-/* CARD */
+/* MAIN CARD */
 .card{
-  max-width:800px;
-  width:94%;
-  padding:70px 60px;
+  max-width:900px;
+  width:95%;
+  padding:70px 65px;
   background:rgba(255,255,255,.14);
   backdrop-filter:blur(20px);
   border-radius:35px;
   box-shadow:0 40px 90px rgba(0,0,0,.7);
   text-align:center;
-  animation:enter 2s ease;
   display:none;
+  animation:enter 2s ease;
+  position:relative;
+  z-index:2;
 }
 
-/* TEXT */
 h1{
   font-family:'Playfair Display',serif;
   font-size:54px;
+  margin-bottom:10px;
   animation:glow 3s infinite alternate;
 }
 h2{
@@ -75,52 +79,99 @@ h2{
   letter-spacing:3px;
   margin-bottom:40px;
 }
+
 #text{
-  font-size:20px;
-  line-height:1.9;
-}
-.signature{
-  margin-top:40px;
-  text-align:right;
-  font-style:italic;
+  font-size:23px;
+  line-height:2.1;
+  letter-spacing:.3px;
+  white-space:pre-line;
 }
 
-/* ANIMATIONS */
-@keyframes enter{
-  from{opacity:0;transform:scale(.85) translateY(80px)}
-  to{opacity:1;transform:scale(1)}
+.signature{
+  margin-top:35px;
+  text-align:right;
+  font-style:italic;
+  font-size:16px;
 }
-@keyframes glow{
-  from{text-shadow:0 0 15px gold}
-  to{text-shadow:0 0 40px gold}
+
+/* CANDLE */
+.candle-area{
+  margin-top:45px;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  animation:fadeIn 2s forwards;
 }
-@keyframes bgZoom{
-  from{background-size:100%}
-  to{background-size:112%}
+.candle{
+  width:40px;
+  height:90px;
+  background:linear-gradient(#fff,#eaeaea);
+  border-radius:8px;
+}
+.flame{
+  width:18px;
+  height:30px;
+  background:radial-gradient(circle,#ffd27d,#ff9f1c);
+  border-radius:50%;
+  margin-bottom:-5px;
+  animation:flicker .3s infinite alternate;
+}
+.blow-text{
+  margin-top:10px;
+  font-size:14px;
+  opacity:.8;
 }
 
 /* STARS & HEARTS */
-.star, .heart{
+.star,.heart{
   position:absolute;
   animation:fall linear infinite;
 }
 .star{
-  width:4px;height:4px;background:white;border-radius:50%;
+  width:4px;height:4px;
+  background:white;
+  border-radius:50%;
 }
 .heart{
   font-size:16px;
   color:pink;
 }
+
 @keyframes fall{
   from{transform:translateY(-10vh);opacity:0}
   50%{opacity:1}
   to{transform:translateY(110vh);opacity:0}
 }
 
+@keyframes flicker{
+  from{transform:scale(1)}
+  to{transform:scale(1.1)}
+}
+
+@keyframes enter{
+  from{opacity:0;transform:scale(.85) translateY(80px)}
+  to{opacity:1;transform:scale(1)}
+}
+
+@keyframes glow{
+  from{text-shadow:0 0 15px gold}
+  to{text-shadow:0 0 40px gold}
+}
+
+@keyframes bgZoom{
+  from{background-size:100%}
+  to{background-size:112%}
+}
+
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
 /* MOBILE */
 @media(max-width:600px){
   h1{font-size:38px}
-  #text{font-size:16px}
+  #text{font-size:17px}
   .card{padding:45px 28px}
 }
 </style>
@@ -130,7 +181,7 @@ h2{
 
 <!-- PASSWORD -->
 <div class="lock" id="lock">
-  <h2>What was my name given by you?</h2>
+  <h2>What was my name given by you ?</h2>
   <input type="password" id="pass" placeholder="Answer">
   <button onclick="unlock()">Unlock</button>
 </div>
@@ -147,11 +198,16 @@ h2{
 
   <div id="text"></div>
 
-  <div class="signature">— Always wishing you well</div>
+  <div class="candle-area" id="candle">
+    <div class="flame"></div>
+    <div class="candle"></div>
+    <p class="blow-text">Make a wish ✨</p>
+  </div>
+
+  <div class="signature">Best wishes — vdt</div>
 </div>
 
 <script>
-/* PASSWORD */
 function unlock(){
   if(document.getElementById("pass").value.toLowerCase()==="nachos"){
     document.getElementById("lock").style.display="none";
@@ -159,18 +215,36 @@ function unlock(){
     document.getElementById("music").play();
     typeText();
     effects();
-  } else alert("Wrong answer 💔");
+  } else {
+    alert("Wrong answer 💔");
+  }
 }
 
-/* TYPEWRITER */
+/* TYPEWRITER TEXT */
 const msg = `Hey Ipshita,
 
-I wish you a very happy birthday. A big congratulations on completing
-16 years of your life with a lot of struggles and the bravery to face them.
+I wish you the happiest birthday and a heartfelt congratulations on
+completing 16 beautiful years of your life — years filled with struggles,
+strength, learning, and the courage to stand tall no matter what.
 
-I know we are not together because of the situations in our lives,
-but you will always be remembered by me —
-and so will the memories we made, full of fun and craziness.`;
+I know your dream is to become a lawyer, to fight for what is right,
+to speak with confidence, and to one day end your journey proudly
+as a judge — respected, strong, and fearless.
+I truly believe you have that fire, that discipline,
+and that mindset to make it happen.
+
+Even though we are not together because of the situations in our lives,
+you will always be remembered by me.
+The memories we created — the fun, the madness,
+the laughter — they’ll always hold a quiet place in my heart.
+
+I wish you a future full of success, peace, and victories,
+and I hope you end up with the boy you always dreamed of —
+someone who understands you, supports your ambitions,
+and stands beside you with pride.
+
+May life be kind to you, and may you achieve everything
+you’ve ever worked for.`;
 
 let i=0;
 function typeText(){
@@ -178,19 +252,25 @@ function typeText(){
     document.getElementById("text").innerHTML += msg.charAt(i);
     i++;
     setTimeout(typeText,40);
+  } else {
+    document.getElementById("candle").style.display="flex";
+    setTimeout(()=>{
+      document.body.style.transition="2s";
+      document.body.style.opacity="0";
+    },15000);
   }
 }
 
 /* STARS & HEARTS */
 function effects(){
   setInterval(()=>{
-    let s=document.createElement("div");
-    s.className=Math.random()>0.5?"star":"heart";
-    s.innerHTML="❤";
-    s.style.left=Math.random()*100+"vw";
-    s.style.animationDuration=5+Math.random()*5+"s";
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),10000);
+    let el=document.createElement("div");
+    el.className=Math.random()>.5?"star":"heart";
+    el.innerHTML="❤";
+    el.style.left=Math.random()*100+"vw";
+    el.style.animationDuration=5+Math.random()*5+"s";
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),10000);
   },300);
 }
 </script>
