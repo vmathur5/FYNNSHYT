@@ -3,237 +3,177 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Ipshita</title>
+<title>Midnight</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{
   height:100%;
-  background:#050507;
-  font-family:'Montserrat',sans-serif;
+  background:#06060a;
+  font-family:'Inter',sans-serif;
   overflow:hidden;
   color:#fff;
 }
 
-/* 🌌 MOVING BACKGROUND */
-.bg{
+/* ===== SMOOTH CAMERA ===== */
+.scene{
   position:fixed;
   inset:0;
-  background:
-    linear-gradient(to bottom,rgba(0,0,0,.3),rgba(0,0,0,.9)),
-    url("Screenshot_20260101_235408_Instagram Lite.jpg") center/cover no-repeat;
-  animation:bgMove 40s linear infinite alternate;
-  filter:brightness(.85);
-  z-index:-3;
+  transform:scale(1.2);
+  animation:camera 18s ease-in-out forwards;
 }
-@keyframes bgMove{
-  0%{transform:scale(1.05) translateY(0)}
-  100%{transform:scale(1.15) translateY(-40px)}
+@keyframes camera{
+  0%{transform:scale(1.2) translateY(40px)}
+  100%{transform:scale(1) translateY(0)}
 }
 
-/* ✨ FLOATING LIGHTS */
-.particles span{
+/* ===== BACKGROUND ===== */
+.bg{
   position:absolute;
-  width:6px;
-  height:6px;
-  background:rgba(255,220,180,.8);
-  border-radius:50%;
-  animation:float 18s linear infinite;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%,rgba(160,120,255,.18),transparent 40%),
+    radial-gradient(circle at 80% 70%,rgba(255,160,120,.15),transparent 40%),
+    linear-gradient(to bottom,rgba(0,0,0,.2),rgba(0,0,0,.9)),
+    url("Screenshot_20260101_235408_Instagram Lite.jpg") center/cover no-repeat;
+  filter:brightness(.85);
+  animation:bgDrift 30s linear infinite;
 }
-@keyframes float{
-  from{transform:translateY(100vh) scale(.4);opacity:0}
-  20%{opacity:1}
-  to{transform:translateY(-10vh) scale(1.4);opacity:0}
+@keyframes bgDrift{
+  to{transform:scale(1.12)}
 }
 
-/* 🪞 GLASS SCENE */
-.scene{
+/* ===== NOISE ===== */
+.noise{
+  position:fixed;
+  inset:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+
+/* ===== CENTER ===== */
+.center{
   position:absolute;
   inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:40px;
+}
+
+/* ===== TEXT ===== */
+.word{
+  position:absolute;
+  font-size:clamp(40px,9vw,140px);
+  font-weight:800;
+  letter-spacing:-2px;
   opacity:0;
-  transform:scale(1.05);
-  transition:1.4s ease;
+  transform:translateY(40px);
+  animation:word 3.5s ease forwards;
 }
-.scene.show{
-  opacity:1;
-  transform:scale(1);
-}
-
-/* 💎 CONTENT */
-.box{
-  max-width:900px;
-  padding:60px;
-  background:rgba(255,255,255,.05);
-  backdrop-filter:blur(22px);
-  border-radius:32px;
-  box-shadow:0 60px 160px rgba(0,0,0,.8);
-  animation:breath 6s ease-in-out infinite;
-}
-@keyframes breath{
-  50%{transform:scale(1.02)}
+@keyframes word{
+  20%{opacity:1;transform:translateY(0)}
+  80%{opacity:1}
+  100%{opacity:0;transform:translateY(-40px)}
 }
 
-/* ✍️ TEXT */
-h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(42px,7vw,88px);
-}
-.name{
-  letter-spacing:6px;
-  margin-bottom:35px;
-  opacity:.7;
-}
-p{
-  font-size:clamp(18px,2.3vw,26px);
-  line-height:2;
-  margin-bottom:28px;
-}
-
-/* 🖼️ PHOTO END */
+/* ===== FINAL PHOTO ===== */
 .photo{
-  width:260px;
-  height:360px;
-  margin:0 auto 30px;
-  border-radius:22px;
+  width:300px;
+  height:420px;
+  border-radius:28px;
   background:url("Screenshot_20260101_235408_Instagram Lite.jpg") center/cover;
-  box-shadow:0 40px 120px rgba(255,180,120,.6);
-  animation:photoPulse 4s ease-in-out infinite alternate;
+  box-shadow:0 60px 160px rgba(0,0,0,.8);
+  animation:float 6s ease-in-out infinite;
 }
-@keyframes photoPulse{
-  to{box-shadow:0 60px 160px rgba(255,200,150,.8)}
+@keyframes float{
+  50%{transform:translateY(-16px)}
 }
 
-/* 🕯️ CANDLES */
+/* ===== CANDLES ===== */
 .candles{
   display:flex;
-  justify-content:center;
-  gap:7px;
+  gap:8px;
+  margin-top:30px;
 }
 .candle{
-  width:7px;
-  height:45px;
+  width:8px;
+  height:52px;
   background:#eee;
   border-radius:4px;
   position:relative;
 }
 .flame{
   position:absolute;
-  top:-16px;
+  top:-18px;
   left:50%;
   transform:translateX(-50%);
-  width:10px;
-  height:18px;
-  background:radial-gradient(circle,#fff7d6,#ffc107,#ff5722);
+  width:12px;
+  height:20px;
+  background:radial-gradient(circle,#fff,#ff9800,#ff5722);
   border-radius:50%;
-  animation:flicker .3s infinite alternate;
+  animation:flicker .2s infinite alternate;
 }
 @keyframes flicker{
-  to{transform:translateX(-50%) scaleY(1.2)}
-}
-.extinguish .flame{
-  opacity:0;
-  transition:opacity 2.5s ease;
+  to{transform:translateX(-50%) scaleY(1.25)}
 }
 
-/* 🌑 FADE */
+/* ===== FADE ===== */
 .fade{
   position:fixed;
   inset:0;
   background:#000;
   opacity:0;
-  transition:opacity 5s ease;
-}
-.sign{
-  margin-top:25px;
-  opacity:.65;
-  font-style:italic;
+  transition:opacity 2s ease;
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-
-<div class="particles">
-  ${[...Array(35)].map(()=>`<span style="left:${Math.random()*100}%;animation-delay:${Math.random()*18}s"></span>`).join("")}
+<div class="scene">
+  <div class="bg"></div>
 </div>
+<div class="noise"></div>
 
-<div class="scene show" id="scene">
-  <div class="box" id="box"></div>
-</div>
-
+<div class="center" id="center"></div>
 <div class="fade" id="fade"></div>
 
 <script>
-const box=document.getElementById("box");
-const scene=document.getElementById("scene");
+const center=document.getElementById("center");
 const fade=document.getElementById("fade");
 
-const scenes=[
-`<h1>Happy 16th Birthday</h1>
-<div class="name">IPSHITA</div>`,
-
-`<p>
-Sixteen years of becoming stronger —
-even on days when life didn’t ask kindly.
-</p>`,
-
-`<p>
-You dream of becoming a lawyer,
-standing for truth,
-and one day ending your journey as a judge.
-You were built for that power.
-</p>`,
-
-`<p>
-Life changed directions for us,
-but memories don’t disappear —
-they stay,
-quietly,
-softly.
-</p>`,
-
-`<p>
-I wish you success,
-peace,
-and that you end up with the boy you always dreamed of —
-someone who understands your worth.
-</p>`,
-
-`<div class="photo"></div>
-<div class="candles" id="candles">
-${'<div class="candle"><div class="flame"></div></div>'.repeat(16)}
-</div>
-<div class="sign">Best wishes — vdt</div>`
-];
-
+const words=["SIXTEEN","MIDNIGHT","ENERGY","UNSTOPPABLE","IPSHITA"];
 let i=0;
-function play(){
-  scene.classList.remove("show");
-  setTimeout(()=>{
-    box.innerHTML=scenes[i];
-    scene.classList.add("show");
+
+function showWord(){
+  if(i<words.length){
+    center.innerHTML=`<div class="word">${words[i]}</div>`;
     i++;
-    if(i<scenes.length){
-      setTimeout(play,2000);
-    }else{
-      setTimeout(()=>{
-        document.getElementById("candles").classList.add("extinguish");
-        setTimeout(()=>fade.style.opacity="1",3500);
-      },2500);
-    }
-  },600);
+    setTimeout(showWord,1200);
+  }else{
+    setTimeout(showFinal,600);
+  }
 }
 
-setTimeout(play,1200);
+function showFinal(){
+  center.innerHTML=`
+    <div>
+      <div class="photo"></div>
+      <div class="candles" id="candles">
+        ${'<div class="candle"><div class="flame"></div></div>'.repeat(16)}
+      </div>
+    </div>
+  `;
+  setTimeout(()=>{
+    document.querySelectorAll(".flame").forEach(f=>f.style.opacity=0);
+    setTimeout(()=>fade.style.opacity=1,800);
+  },2000);
+}
+
+setTimeout(showWord,800);
 </script>
 
 </body>
