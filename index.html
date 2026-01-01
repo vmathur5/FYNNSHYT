@@ -10,178 +10,169 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
-html,body{
-  scroll-behavior:smooth;
-}
-
 body{
   font-family:'Poppins',sans-serif;
   background:#000;
-  color:white;
+  color:#fff;
   overflow:hidden;
 }
 
-/* ===== PASSWORD ===== */
+/* PASSWORD */
 .lock{
   position:fixed;
   inset:0;
-  background:black;
+  background:#000;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   z-index:100;
 }
-.lock h2{
-  font-weight:300;
-  margin-bottom:20px;
-  opacity:.8;
-}
+.lock h2{opacity:.75;font-weight:300;margin-bottom:20px}
 .lock input{
-  padding:15px 25px;
+  padding:16px 28px;
   border-radius:30px;
   border:none;
   font-size:18px;
   text-align:center;
 }
 .lock button{
-  margin-top:15px;
-  padding:12px 35px;
+  margin-top:18px;
+  padding:12px 36px;
   border-radius:30px;
   border:none;
   cursor:pointer;
 }
 
-/* ===== SCROLL CONTAINER ===== */
-.wrapper{
-  height:100vh;
-  overflow-y:auto;
-  scroll-snap-type:y mandatory;
-  display:none;
-}
-
-/* ===== SECTIONS ===== */
-section{
-  min-height:100vh;
-  scroll-snap-align:start;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:relative;
-  padding:80px 20px;
-}
-
-/* ===== BACKGROUND ===== */
+/* BACKGROUND */
 .bg{
   position:fixed;
   inset:0;
   background:
-    linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.85)),
+    linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.6)),
     url("Screenshot_20260101_235408_Instagram Lite.jpg") center/cover no-repeat;
-  transform:scale(1.05);
+  transform:scale(1.08);
   z-index:-1;
-  transition:transform 1s ease;
+  transition:filter 12s ease;
 }
 
-/* ===== HERO ===== */
-.hero{
-  text-align:center;
-  animation:fadeUp 2s ease;
+/* DARK OVERLAY */
+.dark{
+  position:fixed;
+  inset:0;
+  background:#000;
+  opacity:0;
+  transition:opacity 10s ease;
+  pointer-events:none;
+  z-index:1;
 }
+
+/* WRAPPER */
+.wrapper{
+  height:100vh;
+  overflow-y:auto;
+  display:none;
+  scroll-behavior:smooth;
+  position:relative;
+  z-index:2;
+}
+
+/* SECTIONS */
+section{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:100px 24px;
+}
+
+/* HERO */
+.hero{text-align:center}
 .hero h1{
   font-family:'Playfair Display',serif;
-  font-size:64px;
-  letter-spacing:2px;
+  font-size:72px;
 }
 .hero h2{
-  margin-top:15px;
+  margin-top:18px;
+  letter-spacing:5px;
   font-weight:300;
-  letter-spacing:4px;
-  opacity:.8;
+  opacity:.7;
 }
 
-/* ===== GLASS CARD ===== */
+/* CARD */
 .card{
-  max-width:900px;
-  background:rgba(255,255,255,.12);
-  backdrop-filter:blur(25px);
-  border-radius:40px;
-  padding:70px 65px;
-  box-shadow:0 50px 120px rgba(0,0,0,.7);
+  max-width:920px;
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(30px);
+  border-radius:46px;
+  padding:85px 80px;
+  box-shadow:0 70px 180px rgba(0,0,0,.85);
   opacity:0;
-  transform:translateY(60px);
-  transition:1.4s cubic-bezier(.19,1,.22,1);
+  transform:translateY(90px);
+  transition:2.6s cubic-bezier(.19,1,.22,1);
 }
 .card.show{
   opacity:1;
   transform:translateY(0);
 }
 .card p{
-  font-size:23px;
-  line-height:2.1;
+  font-size:24px;
+  line-height:2.25;
   white-space:pre-line;
 }
+.signature{
+  margin-top:60px;
+  text-align:right;
+  font-style:italic;
+  opacity:.75;
+}
 
-/* ===== CANDLE ===== */
+/* CANDLE */
 .candle-area{
   display:flex;
   flex-direction:column;
   align-items:center;
 }
 .flame{
-  width:20px;
-  height:35px;
+  width:22px;
+  height:38px;
   background:radial-gradient(circle,#ffd27d,#ff9f1c);
   border-radius:50%;
   animation:flicker .25s infinite alternate;
+  transition:opacity 3s ease;
 }
 .candle{
-  width:45px;
-  height:110px;
-  background:linear-gradient(#fff,#e6e6e6);
-  border-radius:10px;
+  width:48px;
+  height:120px;
+  background:linear-gradient(#fff,#e5e5e5);
+  border-radius:12px;
 }
 .candle-area p{
-  margin-top:12px;
-  opacity:.7;
+  margin-top:16px;
+  opacity:.65;
 }
 
-/* ===== SIGNATURE ===== */
-.signature{
-  margin-top:50px;
-  text-align:right;
-  font-style:italic;
-  opacity:.8;
-}
-
-/* ===== PARTICLES ===== */
-.particle{
+/* END FADE */
+.end{
   position:fixed;
-  width:2px;
-  height:2px;
-  background:white;
-  opacity:.15;
-  animation:float 15s linear infinite;
+  inset:0;
+  background:#000;
+  opacity:0;
+  transition:opacity 6s ease;
+  pointer-events:none;
+  z-index:10;
 }
 
-/* ===== ANIMATIONS ===== */
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(50px)}
-  to{opacity:1;transform:translateY(0)}
-}
+/* ANIMATIONS */
 @keyframes flicker{
   from{transform:scale(1)}
   to{transform:scale(1.15)}
 }
-@keyframes float{
-  from{transform:translateY(110vh)}
-  to{transform:translateY(-10vh)}
-}
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media(max-width:600px){
-  .hero h1{font-size:40px}
-  .card{padding:45px 30px}
+  .hero h1{font-size:42px}
+  .card{padding:55px 32px}
   .card p{font-size:18px}
 }
 </style>
@@ -190,6 +181,8 @@ section{
 <body>
 
 <div class="bg" id="bg"></div>
+<div class="dark" id="dark"></div>
+<div class="end" id="end"></div>
 
 <!-- PASSWORD -->
 <div class="lock" id="lock">
@@ -203,7 +196,7 @@ section{
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- SCROLL CONTENT -->
+<!-- CONTENT -->
 <div class="wrapper" id="wrap">
 
 <section>
@@ -214,17 +207,17 @@ section{
 </section>
 
 <section>
-  <div class="card" id="card1">
+  <div class="card" id="msg">
     <p>
 Hey Ipshita,
 
 I wish you the happiest birthday and congratulations on completing
 16 beautiful years of your life — years shaped by strength, learning,
-and the courage to stand tall.
+and courage.
 
 I know your dream is to become a lawyer, to fight for what is right,
 and to one day stand proudly as a judge — respected, fearless,
-and confident. I truly believe you have what it takes.
+and confident. I truly believe you will reach there.
 
 Even though we are not together because of life’s situations,
 you will always be remembered by me.
@@ -238,7 +231,6 @@ someone who supports you and stands beside you.
 May life be kind to you, and may you achieve everything
 you’ve worked for.
     </p>
-
     <div class="signature">Best wishes — vdt</div>
   </div>
 </section>
@@ -246,7 +238,7 @@ you’ve worked for.
 <section>
   <div class="card show">
     <div class="candle-area">
-      <div class="flame"></div>
+      <div class="flame" id="flame"></div>
       <div class="candle"></div>
       <p>Make a wish ✨</p>
     </div>
@@ -257,36 +249,47 @@ you’ve worked for.
 
 <script>
 function unlock(){
-  if(document.getElementById("pass").value.toLowerCase()==="nachos"){
-    document.getElementById("lock").style.display="none";
-    document.getElementById("wrap").style.display="block";
-    document.getElementById("music").play();
-    particles();
+  if(pass.value.toLowerCase()==="nachos"){
+    lock.style.display="none";
+    wrap.style.display="block";
+    music.play();
+    autoScroll();
   } else alert("Wrong answer");
 }
 
-/* Reveal on scroll */
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting)e.target.classList.add("show");
-  })
+/* Reveal */
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>x.isIntersecting&&x.target.classList.add("show"));
 },{threshold:.4});
+document.querySelectorAll(".card").forEach(c=>obs.observe(c));
 
-document.querySelectorAll(".card").forEach(c=>observer.observe(c));
+/* AUTO SCROLL WITH PAUSE */
+function autoScroll(){
+  const w=wrap;
+  let y=0;
+  function scroll(){
+    y+=0.15;
+    w.scrollTo(0,y);
+    if(y>window.innerHeight*1.1 && y<window.innerHeight*2){
+      setTimeout(()=>requestAnimationFrame(scroll),4000); // pause on message
+    } else if(y<w.scrollHeight-window.innerHeight){
+      requestAnimationFrame(scroll);
+    } else {
+      endSequence();
+    }
+  }
+  scroll();
+}
 
-/* Particles */
-function particles(){
-  setInterval(()=>{
-    let p=document.createElement("div");
-    p.className="particle";
-    p.style.left=Math.random()*100+"vw";
-    p.style.animationDuration=10+Math.random()*10+"s";
-    document.body.appendChild(p);
-    setTimeout(()=>p.remove(),20000);
-  },400);
+/* END SEQUENCE */
+function endSequence(){
+  dark.style.opacity=.5;
+  setTimeout(()=>flame.style.opacity=0,4000);
+  setTimeout(()=>end.style.opacity=1,9000);
 }
 </script>
 
 </body>
 </html>
+
 
