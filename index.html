@@ -3,130 +3,197 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Ipshita</title>
+<title>For Ipshita</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
 body{
   min-height:100vh;
   background:
-    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.65)),
-    url('Screenshot_20260101_235408_Instagram Lite.jpg') center/cover no-repeat;
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.8)),
+    url("Screenshot_20260101_235408_Instagram Lite.jpg") center/cover no-repeat;
+  animation:bgZoom 22s infinite alternate;
+  font-family:'Poppins',sans-serif;
+  overflow:hidden;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
+  color:white;
 }
 
-/* Glass Card */
+/* PASSWORD SCREEN */
+.lock{
+  position:fixed;
+  inset:0;
+  background:black;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
+}
+.lock input{
+  padding:15px 20px;
+  border-radius:30px;
+  border:none;
+  font-size:18px;
+  margin-top:15px;
+  text-align:center;
+}
+.lock button{
+  margin-top:15px;
+  padding:10px 25px;
+  border-radius:20px;
+  border:none;
+  cursor:pointer;
+}
+
+/* CARD */
 .card{
-  max-width:420px;
-  width:90%;
-  padding:35px 28px;
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(14px);
-  border-radius:22px;
-  border:1px solid rgba(255,255,255,0.25);
-  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-  color:#fff;
-  animation: fadeUp 1.6s ease;
-}
-
-/* Headings */
-.card h1{
-  font-family:'Playfair Display', serif;
-  font-size:30px;
+  max-width:800px;
+  width:94%;
+  padding:70px 60px;
+  background:rgba(255,255,255,.14);
+  backdrop-filter:blur(20px);
+  border-radius:35px;
+  box-shadow:0 40px 90px rgba(0,0,0,.7);
   text-align:center;
-  margin-bottom:5px;
-  animation: glow 2.5s infinite alternate;
+  animation:enter 2s ease;
+  display:none;
 }
 
-.card h2{
+/* TEXT */
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:54px;
+  animation:glow 3s infinite alternate;
+}
+h2{
   font-weight:300;
-  text-align:center;
-  letter-spacing:1px;
-  margin-bottom:25px;
+  letter-spacing:3px;
+  margin-bottom:40px;
 }
-
-/* Text */
-.card p{
-  font-size:15px;
-  line-height:1.7;
-  text-align:center;
-  opacity:0;
-  animation: textFade 2s forwards;
-  animation-delay:0.8s;
+#text{
+  font-size:20px;
+  line-height:1.9;
 }
-
-/* Footer */
 .signature{
-  margin-top:22px;
+  margin-top:40px;
   text-align:right;
   font-style:italic;
-  font-size:13px;
-  opacity:0.8;
 }
 
-/* Animations */
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(40px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+/* ANIMATIONS */
+@keyframes enter{
+  from{opacity:0;transform:scale(.85) translateY(80px)}
+  to{opacity:1;transform:scale(1)}
 }
-
 @keyframes glow{
-  from{ text-shadow:0 0 10px rgba(255,215,150,0.4); }
-  to{ text-shadow:0 0 25px rgba(255,215,150,0.9); }
+  from{text-shadow:0 0 15px gold}
+  to{text-shadow:0 0 40px gold}
+}
+@keyframes bgZoom{
+  from{background-size:100%}
+  to{background-size:112%}
 }
 
-@keyframes textFade{
-  to{ opacity:1; }
+/* STARS & HEARTS */
+.star, .heart{
+  position:absolute;
+  animation:fall linear infinite;
+}
+.star{
+  width:4px;height:4px;background:white;border-radius:50%;
+}
+.heart{
+  font-size:16px;
+  color:pink;
+}
+@keyframes fall{
+  from{transform:translateY(-10vh);opacity:0}
+  50%{opacity:1}
+  to{transform:translateY(110vh);opacity:0}
 }
 
-/* Mobile Fine Tuning */
-@media(max-width:480px){
-  .card{
-    padding:28px 22px;
-  }
-  .card h1{
-    font-size:26px;
-  }
+/* MOBILE */
+@media(max-width:600px){
+  h1{font-size:38px}
+  #text{font-size:16px}
+  .card{padding:45px 28px}
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<!-- PASSWORD -->
+<div class="lock" id="lock">
+  <h2>What was my name given by you?</h2>
+  <input type="password" id="pass" placeholder="Answer">
+  <button onclick="unlock()">Unlock</button>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- CARD -->
+<div class="card" id="card">
   <h1>Happy 16th Birthday</h1>
   <h2>Ipshita ✨</h2>
 
-  <p>
-    Hey Ipshita,<br><br>
-    I wish you a very happy birthday. A big congratulations on completing
-    16 years of your life with a lot of struggles and the bravery to face them.<br><br>
-    I know we are not together because of the situations in our lives,
-    but you will always be remembered by me — and so will the memories
-    we made, full of fun and craziness.
-  </p>
+  <div id="text"></div>
 
-  <div class="signature">
-    — Always wishing you well
-  </div>
+  <div class="signature">— Always wishing you well</div>
 </div>
+
+<script>
+/* PASSWORD */
+function unlock(){
+  if(document.getElementById("pass").value.toLowerCase()==="nachos"){
+    document.getElementById("lock").style.display="none";
+    document.getElementById("card").style.display="block";
+    document.getElementById("music").play();
+    typeText();
+    effects();
+  } else alert("Wrong answer 💔");
+}
+
+/* TYPEWRITER */
+const msg = `Hey Ipshita,
+
+I wish you a very happy birthday. A big congratulations on completing
+16 years of your life with a lot of struggles and the bravery to face them.
+
+I know we are not together because of the situations in our lives,
+but you will always be remembered by me —
+and so will the memories we made, full of fun and craziness.`;
+
+let i=0;
+function typeText(){
+  if(i<msg.length){
+    document.getElementById("text").innerHTML += msg.charAt(i);
+    i++;
+    setTimeout(typeText,40);
+  }
+}
+
+/* STARS & HEARTS */
+function effects(){
+  setInterval(()=>{
+    let s=document.createElement("div");
+    s.className=Math.random()>0.5?"star":"heart";
+    s.innerHTML="❤";
+    s.style.left=Math.random()*100+"vw";
+    s.style.animationDuration=5+Math.random()*5+"s";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),10000);
+  },300);
+}
+</script>
 
 </body>
 </html>
-
