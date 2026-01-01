@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Ipshita</title>
+<title>Happy Birthday Ipshita</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;scroll-behavior:smooth;font-family:'Inter',sans-serif}
 
 body{
-  font-family:'Poppins',sans-serif;
   background:#000;
   color:#fff;
   overflow:hidden;
@@ -19,151 +19,116 @@ body{
 
 /* PASSWORD */
 .lock{
-  position:fixed;
-  inset:0;
+  position:fixed;inset:0;
   background:#000;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  z-index:100;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  z-index:50;
 }
-.lock h2{opacity:.75;font-weight:300;margin-bottom:20px}
+.lock h2{font-weight:300;opacity:.7;margin-bottom:20px}
 .lock input{
-  padding:16px 28px;
-  border-radius:30px;
+  padding:14px 24px;
+  border-radius:12px;
   border:none;
   font-size:18px;
-  text-align:center;
 }
 .lock button{
-  margin-top:18px;
-  padding:12px 36px;
-  border-radius:30px;
-  border:none;
+  margin-top:14px;
+  padding:12px 30px;
+  border:none;border-radius:12px;
+  background:#fff;color:#000;
+  font-weight:600;
   cursor:pointer;
 }
 
 /* BACKGROUND */
 .bg{
-  position:fixed;
-  inset:0;
+  position:fixed;inset:0;
   background:
-    linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.6)),
-    url("Screenshot_20260101_235408_Instagram Lite.jpg") center/cover no-repeat;
-  transform:scale(1.08);
+   linear-gradient(to bottom,rgba(0,0,0,.35),rgba(0,0,0,.7)),
+   url("Screenshot_20260101_235408_Instagram Lite.jpg") center/cover no-repeat;
+  transform:scale(1.1);
+  filter:blur(2px);
   z-index:-1;
-  transition:filter 12s ease;
 }
 
-/* DARK OVERLAY */
-.dark{
-  position:fixed;
-  inset:0;
-  background:#000;
-  opacity:0;
-  transition:opacity 10s ease;
-  pointer-events:none;
-  z-index:1;
-}
-
-/* WRAPPER */
+/* SCROLL WRAPPER */
 .wrapper{
   height:100vh;
   overflow-y:auto;
   display:none;
-  scroll-behavior:smooth;
-  position:relative;
-  z-index:2;
 }
 
 /* SECTIONS */
 section{
   min-height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
-  padding:100px 24px;
+  justify-content:center;
+  padding:80px 20px;
 }
 
 /* HERO */
-.hero{text-align:center}
+.hero{
+  text-align:center;
+  animation:fadeUp 1.2s ease forwards;
+}
 .hero h1{
   font-family:'Playfair Display',serif;
-  font-size:72px;
+  font-size:64px;
 }
-.hero h2{
-  margin-top:18px;
-  letter-spacing:5px;
-  font-weight:300;
-  opacity:.7;
+.hero p{
+  margin-top:16px;
+  letter-spacing:4px;
+  opacity:.75;
 }
 
 /* CARD */
 .card{
-  max-width:920px;
-  background:rgba(255,255,255,.1);
-  backdrop-filter:blur(30px);
-  border-radius:46px;
-  padding:85px 80px;
-  box-shadow:0 70px 180px rgba(0,0,0,.85);
-  opacity:0;
-  transform:translateY(90px);
-  transition:2.6s cubic-bezier(.19,1,.22,1);
-}
-.card.show{
-  opacity:1;
-  transform:translateY(0);
+  max-width:900px;
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(25px);
+  border-radius:28px;
+  padding:60px;
+  box-shadow:0 40px 120px rgba(0,0,0,.6);
+  animation:fadeUp 1.3s ease forwards;
 }
 .card p{
-  font-size:24px;
-  line-height:2.25;
+  font-size:22px;
+  line-height:2;
   white-space:pre-line;
 }
 .signature{
-  margin-top:60px;
+  margin-top:40px;
   text-align:right;
+  opacity:.7;
   font-style:italic;
-  opacity:.75;
 }
 
 /* CANDLE */
-.candle-area{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+.candle-wrap{
+  text-align:center;
+  animation:fadeUp 1s ease forwards;
 }
 .flame{
-  width:22px;
-  height:38px;
-  background:radial-gradient(circle,#ffd27d,#ff9f1c);
+  width:20px;height:32px;
+  background:radial-gradient(circle,#ffd27d,#ff8c00);
   border-radius:50%;
-  animation:flicker .25s infinite alternate;
-  transition:opacity 3s ease;
+  margin:auto;
+  animation:flicker .2s infinite alternate;
 }
 .candle{
-  width:48px;
-  height:120px;
-  background:linear-gradient(#fff,#e5e5e5);
-  border-radius:12px;
-}
-.candle-area p{
-  margin-top:16px;
-  opacity:.65;
-}
-
-/* END FADE */
-.end{
-  position:fixed;
-  inset:0;
-  background:#000;
-  opacity:0;
-  transition:opacity 6s ease;
-  pointer-events:none;
-  z-index:10;
+  width:40px;height:110px;
+  background:#eee;
+  border-radius:10px;
+  margin:auto;
 }
 
 /* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
+}
 @keyframes flicker{
   from{transform:scale(1)}
   to{transform:scale(1.15)}
@@ -171,8 +136,8 @@ section{
 
 /* MOBILE */
 @media(max-width:600px){
-  .hero h1{font-size:42px}
-  .card{padding:55px 32px}
+  .hero h1{font-size:40px}
+  .card{padding:40px}
   .card p{font-size:18px}
 }
 </style>
@@ -180,21 +145,14 @@ section{
 
 <body>
 
-<div class="bg" id="bg"></div>
-<div class="dark" id="dark"></div>
-<div class="end" id="end"></div>
+<div class="bg"></div>
 
 <!-- PASSWORD -->
 <div class="lock" id="lock">
-  <h2>What was my name given by you ?</h2>
+  <h2>What was my name given by you?</h2>
   <input type="password" id="pass">
-  <button onclick="unlock()">Unlock</button>
+  <button onclick="unlock()">Enter</button>
 </div>
-
-<!-- MUSIC -->
-<audio id="music" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
 
 <!-- CONTENT -->
 <div class="wrapper" id="wrap">
@@ -202,46 +160,41 @@ section{
 <section>
   <div class="hero">
     <h1>Happy 16th Birthday</h1>
-    <h2>Ipshita</h2>
+    <p>IPSHITA</p>
   </div>
 </section>
 
 <section>
-  <div class="card" id="msg">
+  <div class="card">
     <p>
 Hey Ipshita,
 
-I wish you the happiest birthday and congratulations on completing
-16 beautiful years of your life — years shaped by strength, learning,
-and courage.
+Wishing you a very happy birthday and congratulations on completing
+16 incredible years of your life — years that shaped your strength,
+confidence, and determination.
 
-I know your dream is to become a lawyer, to fight for what is right,
-and to one day stand proudly as a judge — respected, fearless,
-and confident. I truly believe you will reach there.
+You’ve always dreamed of becoming a lawyer,
+standing up for what is right,
+and one day ending your journey as a respected judge.
+I truly believe you have everything it takes to reach there.
 
-Even though we are not together because of life’s situations,
+Even though life placed us on different paths,
 you will always be remembered by me.
-The memories we made — the fun, the madness, the laughter —
-they’ll always stay.
+The memories, the fun, the madness — they stay.
 
 I wish you a future full of success and peace,
-and I hope you end up with the boy you always dreamed of —
-someone who supports you and stands beside you.
-
-May life be kind to you, and may you achieve everything
-you’ve worked for.
+and I hope you end up with the boy you always dreamed of,
+someone who truly understands you and stands beside you.
     </p>
     <div class="signature">Best wishes — vdt</div>
   </div>
 </section>
 
 <section>
-  <div class="card show">
-    <div class="candle-area">
-      <div class="flame" id="flame"></div>
-      <div class="candle"></div>
-      <p>Make a wish ✨</p>
-    </div>
+  <div class="candle-wrap">
+    <div class="flame" id="flame"></div>
+    <div class="candle"></div>
+    <p style="opacity:.6;margin-top:12px">Make a wish ✨</p>
   </div>
 </section>
 
@@ -252,44 +205,34 @@ function unlock(){
   if(pass.value.toLowerCase()==="nachos"){
     lock.style.display="none";
     wrap.style.display="block";
-    music.play();
     autoScroll();
-  } else alert("Wrong answer");
+  } else alert("Wrong password");
 }
 
-/* Reveal */
-const obs=new IntersectionObserver(e=>{
-  e.forEach(x=>x.isIntersecting&&x.target.classList.add("show"));
-},{threshold:.4});
-document.querySelectorAll(".card").forEach(c=>obs.observe(c));
-
-/* AUTO SCROLL WITH PAUSE */
+/* FAST SMOOTH AUTO SCROLL */
 function autoScroll(){
   const w=wrap;
-  let y=0;
-  function scroll(){
-    y+=0.15;
-    w.scrollTo(0,y);
-    if(y>window.innerHeight*1.1 && y<window.innerHeight*2){
-      setTimeout(()=>requestAnimationFrame(scroll),4000); // pause on message
-    } else if(y<w.scrollHeight-window.innerHeight){
-      requestAnimationFrame(scroll);
-    } else {
-      endSequence();
+  let pos=0;
+  const speed=0.6;
+  function step(){
+    pos+=speed;
+    w.scrollTo(0,pos);
+    if(pos < w.scrollHeight - innerHeight){
+      requestAnimationFrame(step);
     }
   }
-  scroll();
+  step();
 }
 
-/* END SEQUENCE */
-function endSequence(){
-  dark.style.opacity=.5;
-  setTimeout(()=>flame.style.opacity=0,4000);
-  setTimeout(()=>end.style.opacity=1,9000);
-}
+/* EXTINGUISH FLAME */
+setTimeout(()=>{
+  const flame=document.getElementById("flame");
+  if(flame) flame.style.opacity=0;
+},12000);
 </script>
 
 </body>
 </html>
+
 
 
